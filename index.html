@@ -142,7 +142,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 .menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* ============================================================
-   HERO — nebulosa laranja + texto em degradê + streaks
+   HERO — nebulosa laranja + texto em degradê
    ============================================================ */
 .hero{
   position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;
@@ -166,22 +166,6 @@ a.textlink:hover .arrow{transform:translateX(4px)}
   33%{transform:translate(6%,-4%) scale(1.12)}
   66%{transform:translate(-5%,5%) scale(.95)}
   100%{transform:translate(0,0) scale(1)}
-}
-/* streaks horizontais de luz */
-.streaks{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.streak{position:absolute;left:-30%;width:160%;height:1.5px;
-  background:linear-gradient(90deg,transparent,rgba(255,190,140,.85),rgba(255,255,255,.6),transparent);
-  filter:drop-shadow(0 0 6px rgba(255,150,90,.7));opacity:0;
-  animation:streakSweep 7s var(--ease) infinite}
-.streak.s1{top:46%;animation-delay:.4s}
-.streak.s2{top:52%;width:120%;left:-10%;animation-delay:2.4s;animation-duration:8s}
-.streak.s3{top:58%;width:90%;left:6%;animation-delay:4.2s;animation-duration:6.5s;height:1px}
-.streak.s4{top:49%;width:70%;left:20%;animation-delay:5.6s;animation-duration:9s}
-@keyframes streakSweep{
-  0%{transform:translateX(-20%);opacity:0}
-  12%{opacity:1}
-  55%{opacity:.9}
-  100%{transform:translateX(20%);opacity:0}
 }
 /* grão sutil */
 .hero::after{
@@ -209,11 +193,15 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 .hero-pill .spark{color:var(--flame-hi)}
 
 .hero h1{
-  margin:1.6rem 0 0;font-size:var(--t-hero);
-  font-weight:900;font-stretch:125%;line-height:.94;letter-spacing:-.02em;
+  margin:1.4rem 0 0;font-size:var(--t-hero);
+  font-weight:900;font-stretch:125%;line-height:.96;letter-spacing:-.02em;
   background:linear-gradient(180deg,#fff 0%,#ffd9a8 42%,#ff8f52 74%,#e75533 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:drop-shadow(0 6px 30px rgba(231,85,51,.25));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+/* fallback: se o navegador não recorta o degradê no texto, mostra branco */
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){
+  .hero h1{color:#fff;-webkit-text-fill-color:#fff;background:none}
 }
 .hero h1 .row{display:block;overflow:hidden}
 .hero h1 .row > span{display:inline-block;transform:translateY(115%);animation:rise .9s var(--ease) forwards}
@@ -228,15 +216,6 @@ a.textlink:hover .arrow{transform:translateX(4px)}
   opacity:0;animation:fadeUp .8s .74s var(--ease) forwards}
 .btn.glow{background:linear-gradient(180deg,#ff8a3d,#e75533);box-shadow:0 14px 40px -12px rgba(231,85,51,.8)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-
-.scrollcue{
-  position:absolute;left:50%;translate:-50% 0;bottom:26px;z-index:2;
-  display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--muted);font-size:.82rem;
-  opacity:0;animation:fadeUp .8s 1s var(--ease) forwards;
-}
-.scrollcue .dot{width:22px;height:34px;border:1.5px solid var(--muted);border-radius:12px;position:relative}
-.scrollcue .dot::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:6px;background:var(--flame);border-radius:2px;transform:translateX(-50%);animation:scrolldot 1.6s infinite}
-@keyframes scrolldot{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
 
 /* ============================================================
    STATS
@@ -379,18 +358,84 @@ a.textlink:hover .arrow{transform:translateX(4px)}
   .menu-btn{display:block}
   .nav.open .nav-links{
     display:flex;flex-direction:column;gap:1.4rem;align-items:flex-start;
-    position:fixed;inset:64px 0 auto 0;background:rgba(18,18,18,.97);
+    position:fixed;inset:60px 0 auto 0;background:rgba(18,18,18,.97);
     backdrop-filter:blur(14px);padding:2rem var(--gutter) 2.4rem;border-bottom:1px solid var(--line);
   }
   .nav.open .nav-links a{font-size:1.5rem;font-weight:700}
   .course-grid{grid-template-columns:1fr}
   .prompt-grid{grid-template-columns:1fr}
-  .foot-top{grid-template-columns:1fr 1fr}
+  .foot-top{grid-template-columns:1fr 1fr;gap:2rem}
 }
-@media (max-width:560px){
+
+/* ---------- MOBILE (foco principal) ---------- */
+@media (max-width:640px){
+  :root{
+    --gutter:20px;
+    --t-hero:clamp(2.4rem, 1.4rem + 7.2vw, 3.4rem);
+    --t-h2:clamp(1.9rem, 1.3rem + 4vw, 2.6rem);
+    --t-lead:1.05rem;
+  }
+
+  /* HERO: altura natural, respiro certo, botões full-width */
+  .hero{min-height:auto;padding:120px var(--gutter) 72px;justify-content:flex-start}
+  .hero-inner{align-items:center}
+  .hero-pill{font-size:.82rem;padding:.45rem .9rem}
+  .hero h1{margin-top:1.2rem;line-height:1.02}
+  .hero-sub{margin:1.2rem auto 1.9rem;font-size:1.02rem}
+  .hero-actions{flex-direction:column;width:100%;gap:.8rem}
+  .hero-actions .btn{width:100%;justify-content:center;padding:1.05rem 1.2rem}
+
+  /* espaçamento vertical geral menor */
+  .section{padding-block:clamp(56px,13vw,76px)}
+  .head-row{margin-bottom:32px}
+  .head-row h2 br{display:none}
+  .lead{font-size:1rem}
+
+  /* STATS: 2 colunas enxutas */
   .stats-grid{grid-template-columns:1fr 1fr}
-  .foot-top{grid-template-columns:1fr}
-  .hero{padding-top:120px}
+  .stat{padding:26px 20px}
+  .stat .num{font-size:clamp(2.2rem,7vw,3rem)}
+  .stat .lab{font-size:.9rem}
+
+  /* SERVIÇOS: card um pouco mais estreito, hint centralizado */
+  .svc{width:78vw;min-height:0;padding:26px}
+  .svc h3{margin:.7rem 0 .6rem}
+  .svc .tag{padding-top:1.1rem}
+  .marquee-hint{justify-content:center;text-align:center}
+
+  /* SOBRE */
+  .about h2 br{display:none}
+  .about p{font-size:1.05rem}
+  .mini-list{grid-template-columns:1fr}
+  .about-badge{left:auto;right:14px;bottom:-14px;padding:14px 18px}
+  .about .btn{width:100%;justify-content:center}
+
+  /* MANIFESTO */
+  .manifesto .big br{display:none}
+  .manifesto .big{font-size:clamp(2rem,9vw,3rem)}
+
+  /* CURSOS */
+  .course{flex-direction:column;align-items:flex-start;gap:1rem}
+  .course .btn{width:100%;justify-content:center}
+  .block-title{margin-bottom:1.4rem}
+
+  /* CTA */
+  .cta h2 br{display:none}
+  .cta-actions{flex-direction:column;width:100%}
+  .cta-actions .btn{width:100%;justify-content:center}
+
+  /* FOOTER */
+  .foot-top{grid-template-columns:1fr;gap:1.8rem}
+  .foot-bottom{flex-direction:column;gap:.5rem}
+
+  /* menos custo de blur no celular */
+  .neb{filter:blur(42px)}
+}
+
+/* telas bem pequenas */
+@media (max-width:380px){
+  .hero h1{font-size:2.2rem}
+  .brand span{font-size:1.2rem}
 }
 
 /* Reveal on scroll (discreto) */
@@ -400,7 +445,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 /* Acessibilidade: menos movimento — mantém o fundo ambiente, calma as entradas */
 @media (prefers-reduced-motion:reduce){
   .hero h1 .row > span{transform:none;animation:none}
-  .hero-pill,.hero-sub,.hero-actions,.scrollcue{opacity:1;animation:none}
+  .hero-pill,.hero-sub,.hero-actions{opacity:1;animation:none}
   .reveal{opacity:1;transform:none;transition:none}
   html{scroll-behavior:auto}
 }
@@ -434,10 +479,6 @@ a.textlink:hover .arrow{transform:translateX(4px)}
     <div class="cloud c1"></div><div class="cloud c2"></div>
     <div class="cloud c3"></div><div class="cloud c4"></div>
   </div>
-  <div class="streaks" aria-hidden="true">
-    <div class="streak s1"></div><div class="streak s2"></div>
-    <div class="streak s3"></div><div class="streak s4"></div>
-  </div>
 
   <div class="hero-inner">
     <span class="hero-pill"><span class="spark">✦</span> 14 anos liderando times e marcas</span>
@@ -452,8 +493,6 @@ a.textlink:hover .arrow{transform:translateX(4px)}
       <a href="#educacao" class="btn ghost" data-magnetic>Cursos &amp; Prompts</a>
     </div>
   </div>
-
-  <div class="scrollcue" aria-hidden="true"><span class="dot"></span> role pra ver mais</div>
 </section>
 
 <!-- ===================== STATS ===================== -->
@@ -520,9 +559,6 @@ a.textlink:hover .arrow{transform:translateX(4px)}
     </div>
   </div>
 
-  <div class="wrap">
-    <p class="marquee-hint">↔ passe o mouse pra desacelerar</p>
-  </div>
 </section>
 
 <!-- ===================== SOBRE ===================== -->
