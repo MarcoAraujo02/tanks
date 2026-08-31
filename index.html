@@ -192,14 +192,15 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 .hero h1{
   margin:1.4rem 0 0;font-size:var(--t-hero);
   font-weight:900;font-stretch:125%;line-height:.96;letter-spacing:-.02em;
-  background:linear-gradient(180deg,#fff 0%,#ffd9a8 42%,#ff8f52 74%,#e75533 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
+  color:#fff; /* cor sólida garantida — sem depender de background-clip:text,
+                 que falha silenciosamente (texto invisível) em alguns
+                 webviews mobile (in-app browsers, modo economia de dados) */
 }
-/* fallback: se o navegador não recorta o degradê no texto, mostra branco */
-@supports not ((-webkit-background-clip:text) or (background-clip:text)){
-  .hero h1{color:#fff;-webkit-text-fill-color:#fff;background:none}
-}
+/* "degradê" feito por cor sólida linha a linha — mesmo efeito visual,
+   sem risco de texto sumir no mobile */
+.hero h1 .row:nth-child(1){color:#fff}
+.hero h1 .row:nth-child(2){color:#ffd9a8}
+.hero h1 .row:nth-child(3){color:var(--flame-hi)}
 .hero h1 .row{display:block;overflow:hidden}
 .hero h1 .row > span{display:inline-block;transform:translateY(115%);animation:rise .9s var(--ease) forwards}
 .hero h1 .row:nth-child(1) > span{animation-delay:.18s}
@@ -207,7 +208,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 .hero h1 .row:nth-child(3) > span{animation-delay:.42s}
 @keyframes rise{to{transform:translateY(0)}}
 
-.hero-sub{max-width:56ch;margin:1.6rem auto 2.4rem;font-size:var(--t-lead);color:#e7ded4;
+.hero-sub{max-width:56ch;margin:1.6rem auto 2.4rem;font-size:clamp(1.2rem,1rem + 1.1vw,1.65rem);line-height:1.45;color:#f0e8de;
   opacity:0;animation:fadeUp .8s .62s var(--ease) forwards}
 .hero-actions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;
   opacity:0;animation:fadeUp .8s .74s var(--ease) forwards}
@@ -368,7 +369,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 @media (max-width:640px){
   :root{
     --gutter:20px;
-    --t-hero:clamp(2.4rem, 1.4rem + 7.2vw, 3.4rem);
+    --t-hero:clamp(2.9rem, 1.6rem + 9.5vw, 4.1rem);
     --t-h2:clamp(1.9rem, 1.3rem + 4vw, 2.6rem);
     --t-lead:1.05rem;
   }
@@ -378,7 +379,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
   .hero-inner{align-items:center}
   .hero-pill{font-size:.82rem;padding:.45rem .9rem}
   .hero h1{margin-top:1.2rem;line-height:1.02}
-  .hero-sub{margin:1.2rem auto 1.9rem;font-size:1.02rem}
+  .hero-sub{margin:1.2rem auto 1.9rem;font-size:1.18rem;line-height:1.5}
   .hero-actions{flex-direction:column;width:100%;gap:.8rem}
   .hero-actions .btn{width:100%;justify-content:center;padding:1.05rem 1.2rem}
 
