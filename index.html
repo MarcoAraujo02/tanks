@@ -142,31 +142,28 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 .menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* ============================================================
-   HERO — nebulosa laranja + texto em degradê
+   HERO — shader WebGL animado (nebulosa laranja/preta)
    ============================================================ */
 .hero{
   position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;
   text-align:center;padding:120px var(--gutter) clamp(60px,9vh,120px);
   overflow:hidden;isolation:isolate;
+  background:#080706; /* cor de base enquanto o shader inicializa */
+}
+/* canvas do shader ocupa o hero inteiro, atrás do conteúdo */
+.hero-canvas{
+  position:absolute;inset:0;z-index:-2;width:100%;height:100%;
+  display:block;touch-action:none;background:#080706;
+}
+/* fallback (sem WebGL2 ou reduced-motion “duro”): volta pro degradê estático */
+.hero.no-webgl{
   background:
     radial-gradient(60% 46% at 50% 20%, rgba(255,168,86,.30), transparent 62%),
     radial-gradient(80% 60% at 50% 8%, rgba(231,85,51,.26), transparent 66%),
     radial-gradient(120% 120% at 50% 130%, #080706, transparent 55%),
     #080706;
 }
-/* nebulosa: nuvens laranja que derivam devagar */
-.neb{position:absolute;inset:-25%;z-index:-2;pointer-events:none;filter:blur(60px)}
-.cloud{position:absolute;border-radius:50%;mix-blend-mode:screen;opacity:.85;animation:cloudDrift 26s var(--ease) infinite}
-.cloud.c1{width:52vmax;height:52vmax;left:6%;top:0;background:radial-gradient(circle,rgba(231,85,51,.55),transparent 62%);animation-duration:30s}
-.cloud.c2{width:44vmax;height:44vmax;right:2%;top:6%;background:radial-gradient(circle,rgba(255,150,74,.5),transparent 62%);animation-duration:24s;animation-delay:-8s}
-.cloud.c3{width:60vmax;height:60vmax;left:24%;top:-8%;background:radial-gradient(circle,rgba(255,120,60,.4),transparent 60%);animation-duration:34s;animation-delay:-14s}
-.cloud.c4{width:38vmax;height:38vmax;left:40%;top:22%;background:radial-gradient(circle,rgba(189,58,31,.5),transparent 60%);animation-duration:28s;animation-delay:-5s}
-@keyframes cloudDrift{
-  0%{transform:translate(0,0) scale(1)}
-  33%{transform:translate(6%,-4%) scale(1.12)}
-  66%{transform:translate(-5%,5%) scale(.95)}
-  100%{transform:translate(0,0) scale(1)}
-}
+.hero.no-webgl .hero-canvas{display:none}
 /* grão sutil */
 .hero::after{
   content:"";position:absolute;inset:0;z-index:-1;opacity:.5;pointer-events:none;
@@ -370,93 +367,68 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 /* ---------- MOBILE (foco principal) ---------- */
 @media (max-width:640px){
   :root{
-    --gutter:22px;
-    /* tipografia maior e com escala mais generosa no mobile */
-    --t-hero:clamp(2.9rem, 1.7rem + 8.6vw, 3.8rem);
-    --t-h2:clamp(2.15rem, 1.4rem + 5.4vw, 2.8rem);
-    --t-h3:clamp(1.4rem, 1.1rem + 1.8vw, 1.7rem);
-    --t-lead:1.14rem;
+    --gutter:20px;
+    --t-hero:clamp(2.4rem, 1.4rem + 7.2vw, 3.4rem);
+    --t-h2:clamp(1.9rem, 1.3rem + 4vw, 2.6rem);
+    --t-lead:1.05rem;
   }
 
-  /* HERO: altura natural, respiro certo, texto centralizado e maior */
-  .hero{min-height:auto;padding:126px var(--gutter) 76px;justify-content:flex-start}
-  .hero-inner{align-items:center;text-align:center}
-  .hero-pill{font-size:.86rem;padding:.5rem 1rem}
-  .hero h1{margin-top:1.3rem;line-height:1.04}
-  .hero-sub{margin:1.3rem auto 2rem;font-size:1.12rem;line-height:1.55;max-width:34ch}
+  /* HERO: altura natural, respiro certo, botões full-width */
+  .hero{min-height:auto;padding:120px var(--gutter) 72px;justify-content:flex-start}
+  .hero-inner{align-items:center}
+  .hero-pill{font-size:.82rem;padding:.45rem .9rem}
+  .hero h1{margin-top:1.2rem;line-height:1.02}
+  .hero-sub{margin:1.2rem auto 1.9rem;font-size:1.02rem}
   .hero-actions{flex-direction:column;width:100%;gap:.8rem}
-  .hero-actions .btn{width:100%;justify-content:center;padding:1.1rem 1.2rem;font-size:1.05rem}
+  .hero-actions .btn{width:100%;justify-content:center;padding:1.05rem 1.2rem}
 
   /* espaçamento vertical geral menor */
   .section{padding-block:clamp(56px,13vw,76px)}
-
-  /* Cabeçalhos de seção: centralizados, mais legíveis */
-  .head-row{flex-direction:column;align-items:center;text-align:center;gap:1rem;margin-bottom:36px}
-  .head-row h2{margin-top:.7rem;line-height:1.05}
+  .head-row{margin-bottom:32px}
   .head-row h2 br{display:none}
-  .lead{font-size:1.08rem;line-height:1.55;max-width:36ch;margin-inline:auto}
-  .eyebrow{justify-content:center}
+  .lead{font-size:1rem}
 
-  /* STATS: 2 colunas enxutas, números maiores */
+  /* STATS: 2 colunas enxutas */
   .stats-grid{grid-template-columns:1fr 1fr}
-  .stat{padding:28px 20px;text-align:center}
-  .stat .num{font-size:clamp(2.6rem,9vw,3.3rem)}
-  .stat .lab{font-size:.95rem;line-height:1.4;margin-inline:auto}
+  .stat{padding:26px 20px}
+  .stat .num{font-size:clamp(2.2rem,7vw,3rem)}
+  .stat .lab{font-size:.9rem}
 
-  /* SERVIÇOS: card mais largo e legível, hint centralizado */
-  .svc{width:84vw;min-height:0;padding:28px}
-  .svc h3{margin:.8rem 0 .65rem;font-size:1.35rem}
-  .svc p{font-size:1.02rem;line-height:1.5}
+  /* SERVIÇOS: card um pouco mais estreito, hint centralizado */
+  .svc{width:78vw;min-height:0;padding:26px}
+  .svc h3{margin:.7rem 0 .6rem}
   .svc .tag{padding-top:1.1rem}
   .marquee-hint{justify-content:center;text-align:center}
 
-  /* SOBRE: bloco centralizado, texto maior */
-  .about-grid{text-align:center}
-  .about .eyebrow{justify-content:center}
-  .about h2{text-align:center}
+  /* SOBRE */
   .about h2 br{display:none}
-  .about p{font-size:1.1rem;line-height:1.6;margin-inline:auto}
-  .mini-list{grid-template-columns:1fr;justify-items:center;text-align:left;max-width:280px;margin-inline:auto}
+  .about p{font-size:1.05rem}
+  .mini-list{grid-template-columns:1fr}
   .about-badge{left:auto;right:14px;bottom:-14px;padding:14px 18px}
   .about .btn{width:100%;justify-content:center}
-  .about .sign{text-align:center}
 
-  /* MANIFESTO: centralizado e mais impactante */
-  .manifesto{text-align:center}
-  .manifesto .wrap{display:flex;flex-direction:column;align-items:center}
+  /* MANIFESTO */
   .manifesto .big br{display:none}
-  .manifesto .big{font-size:clamp(2.3rem,10vw,3.2rem);max-width:16ch}
-  .manifesto .sub{font-size:1.1rem;line-height:1.6;margin-inline:auto}
+  .manifesto .big{font-size:clamp(2rem,9vw,3rem)}
 
-  /* CURSOS & PROMPTS */
-  .block-title{flex-direction:column;align-items:center;text-align:center;gap:.4rem;margin-bottom:1.6rem}
+  /* CURSOS */
   .course{flex-direction:column;align-items:flex-start;gap:1rem}
-  .course .ct h4{font-size:1.25rem}
-  .course .ct p{font-size:1rem}
   .course .btn{width:100%;justify-content:center}
-  .prompt .meta h4{font-size:1.3rem}
+  .block-title{margin-bottom:1.4rem}
 
-  /* CTA: mais espaço e texto centralizado maior */
-  .cta h2{font-size:clamp(2.3rem,9vw,3.2rem)}
+  /* CTA */
   .cta h2 br{display:none}
-  .cta p{font-size:1.1rem;line-height:1.6}
   .cta-actions{flex-direction:column;width:100%}
-  .cta-actions .btn{width:100%;justify-content:center;font-size:1.05rem}
+  .cta-actions .btn{width:100%;justify-content:center}
 
-  /* FOOTER: centralizado, mais legível */
-  .foot-top{grid-template-columns:1fr;gap:2.2rem;text-align:center}
-  .foot .brand{justify-content:center}
-  .foot-col h5{text-align:center}
-  .foot-col a{text-align:center}
-  .foot-bottom{flex-direction:column;gap:.6rem;text-align:center}
-
-  /* menos custo de blur no celular */
-  .neb{filter:blur(42px)}
+  /* FOOTER */
+  .foot-top{grid-template-columns:1fr;gap:1.8rem}
+  .foot-bottom{flex-direction:column;gap:.5rem}
 }
 
 /* telas bem pequenas */
 @media (max-width:380px){
-  .hero h1{font-size:2.5rem}
+  .hero h1{font-size:2.2rem}
   .brand span{font-size:1.2rem}
 }
 
@@ -497,10 +469,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="topo">
-  <div class="neb" aria-hidden="true">
-    <div class="cloud c1"></div><div class="cloud c2"></div>
-    <div class="cloud c3"></div><div class="cloud c4"></div>
-  </div>
+  <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
 
   <div class="hero-inner">
     <span class="hero-pill"><span class="spark">✦</span> 14 anos liderando times e marcas</span>
@@ -861,6 +830,165 @@ a.textlink:hover .arrow{transform:translateX(4px)}
     // recalcula ao redimensionar (largura do card muda)
     var rt;
     window.addEventListener("resize", function(){ clearTimeout(rt); tries = 0; rt = setTimeout(build, 200); });
+  })();
+
+  /* ============================================================
+     HERO SHADER — fundo animado em WebGL2 (nebulosa laranja/preta)
+     Adaptado do componente React "animated-shader-hero" pro padrão
+     vanilla JS + canvas usado no resto do site.
+     ============================================================ */
+  (function(){
+    var heroEl = document.getElementById("topo");
+    var canvas = document.getElementById("heroCanvas");
+    if(!heroEl || !canvas) return;
+
+    var gl = canvas.getContext("webgl2");
+    if(!gl){ heroEl.classList.add("no-webgl"); return; }
+
+    var vertexSrc = "#version 300 es\nprecision highp float;\nin vec4 position;\nvoid main(){gl_Position=position;}";
+
+    // Mesmo shader do componente original — a paleta quente (laranja
+    // sobre preto) já bate com a identidade da TENKS.
+    var fragmentSrc = "#version 300 es\n" +
+      "precision highp float;\n" +
+      "out vec4 O;\n" +
+      "uniform vec2 resolution;\n" +
+      "uniform float time;\n" +
+      "#define FC gl_FragCoord.xy\n" +
+      "#define T time\n" +
+      "#define R resolution\n" +
+      "#define MN min(R.x,R.y)\n" +
+      "float rnd(vec2 p){p=fract(p*vec2(12.9898,78.233));p+=dot(p,p+34.56);return fract(p.x*p.y);}\n" +
+      "float noise(in vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);float a=rnd(i),b=rnd(i+vec2(1,0)),c=rnd(i+vec2(0,1)),d=rnd(i+1.);return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);}\n" +
+      "float fbm(vec2 p){float t=.0,a=1.;mat2 m=mat2(1.,-.5,.2,1.2);for(int i=0;i<5;i++){t+=a*noise(p);p*=2.*m;a*=.5;}return t;}\n" +
+      "float clouds(vec2 p){float d=1.,t=.0;for(float i=.0;i<3.;i++){float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);t=mix(t,d,a);d=a;p*=2./(i+1.);}return t;}\n" +
+      "void main(void){\n" +
+      "  vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);\n" +
+      "  vec3 col=vec3(0);\n" +
+      "  float bg=clouds(vec2(st.x+T*.5,-st.y));\n" +
+      "  uv*=1.-.3*(sin(T*.2)*.5+.5);\n" +
+      "  for(float i=1.;i<12.;i++){\n" +
+      "    uv+=.1*cos(i*vec2(.1+.01*i,.8)+i*i+T*.5+.1*uv.x);\n" +
+      "    vec2 p=uv;\n" +
+      "    float d=length(p);\n" +
+      "    col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);\n" +
+      "    float b=noise(i+p+bg*1.731);\n" +
+      "    col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));\n" +
+      "    col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);\n" +
+      "  }\n" +
+      "  O=vec4(col,1);\n" +
+      "}";
+
+    var vertices = [-1, 1, -1, -1, 1, 1, 1, -1];
+    var dpr = Math.max(1, 0.5 * window.devicePixelRatio);
+    var program, vs, fs, buffer, uni = {};
+
+    function compile(shader, source){
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS)){
+        console.error("Erro ao compilar shader do hero:", gl.getShaderInfoLog(shader));
+      }
+    }
+
+    function setup(){
+      vs = gl.createShader(gl.VERTEX_SHADER);
+      fs = gl.createShader(gl.FRAGMENT_SHADER);
+      compile(vs, vertexSrc);
+      compile(fs, fragmentSrc);
+      program = gl.createProgram();
+      gl.attachShader(program, vs);
+      gl.attachShader(program, fs);
+      gl.linkProgram(program);
+      if(!gl.getProgramParameter(program, gl.LINK_STATUS)){
+        console.error("Erro ao linkar programa do hero:", gl.getProgramInfoLog(program));
+        heroEl.classList.add("no-webgl");
+        return false;
+      }
+      return true;
+    }
+
+    function init(){
+      buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+      var position = gl.getAttribLocation(program, "position");
+      gl.enableVertexAttribArray(position);
+      gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+      uni.resolution = gl.getUniformLocation(program, "resolution");
+      uni.time = gl.getUniformLocation(program, "time");
+      uni.move = gl.getUniformLocation(program, "move");
+      uni.touch = gl.getUniformLocation(program, "touch");
+      uni.pointerCount = gl.getUniformLocation(program, "pointerCount");
+      uni.pointers = gl.getUniformLocation(program, "pointers");
+    }
+
+    function resize(){
+      var r = heroEl.getBoundingClientRect();
+      canvas.width = Math.max(1, Math.round(r.width * dpr));
+      canvas.height = Math.max(1, Math.round(r.height * dpr));
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+
+    // ponteiro/mouse dentro do hero — dá vida ao shader sem travar cliques
+    var pointers = new Map();
+    var lastFirst = [0, 0];
+    var moves = [0, 0];
+
+    function mapPoint(clientX, clientY){
+      var r = canvas.getBoundingClientRect();
+      return [(clientX - r.left) * dpr, canvas.height - (clientY - r.top) * dpr];
+    }
+    heroEl.addEventListener("pointermove", function(e){
+      var p = mapPoint(e.clientX, e.clientY);
+      pointers.set(e.pointerId, p);
+      lastFirst = p;
+      moves = [moves[0] + e.movementX, moves[1] + e.movementY];
+    }, {passive:true});
+    heroEl.addEventListener("pointerleave", function(e){ pointers.delete(e.pointerId); }, {passive:true});
+    heroEl.addEventListener("pointerdown", function(e){ pointers.set(e.pointerId, mapPoint(e.clientX, e.clientY)); }, {passive:true});
+    heroEl.addEventListener("pointerup", function(e){ pointers.delete(e.pointerId); }, {passive:true});
+
+    function render(now){
+      if(!program || gl.getProgramParameter(program, gl.DELETE_STATUS)) return;
+      gl.clearColor(0, 0, 0, 1);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.useProgram(program);
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.uniform2f(uni.resolution, canvas.width, canvas.height);
+      gl.uniform1f(uni.time, now * 1e-3);
+      gl.uniform2f(uni.move, moves[0], moves[1]);
+      gl.uniform2f(uni.touch, lastFirst[0], lastFirst[1]);
+      gl.uniform1i(uni.pointerCount, pointers.size);
+      var coords = pointers.size ? Array.from(pointers.values()).flat() : [0, 0];
+      gl.uniform2fv(uni.pointers, coords);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+
+    if(!setup()) return;
+    init();
+    resize();
+
+    var raf;
+    function loop(now){
+      render(now);
+      raf = requestAnimationFrame(loop);
+    }
+
+    if(reduce){
+      render(0); // respeita "menos movimento": desenha 1 quadro estático
+    } else {
+      loop(0);
+    }
+
+    var rt2;
+    window.addEventListener("resize", function(){
+      clearTimeout(rt2);
+      rt2 = setTimeout(function(){
+        dpr = Math.max(1, 0.5 * window.devicePixelRatio);
+        resize();
+      }, 150);
+    });
   })();
 
   /* ---- ano no rodapé ---- */
