@@ -370,63 +370,85 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 /* ---------- MOBILE (foco principal) ---------- */
 @media (max-width:640px){
   :root{
-    --gutter:20px;
-    --t-hero:clamp(2.4rem, 1.4rem + 7.2vw, 3.4rem);
-    --t-h2:clamp(1.9rem, 1.3rem + 4vw, 2.6rem);
-    --t-lead:1.05rem;
+    --gutter:22px;
+    /* tipografia maior e com escala mais generosa no mobile */
+    --t-hero:clamp(2.9rem, 1.7rem + 8.6vw, 3.8rem);
+    --t-h2:clamp(2.15rem, 1.4rem + 5.4vw, 2.8rem);
+    --t-h3:clamp(1.4rem, 1.1rem + 1.8vw, 1.7rem);
+    --t-lead:1.14rem;
   }
 
-  /* HERO: altura natural, respiro certo, botões full-width */
-  .hero{min-height:auto;padding:120px var(--gutter) 72px;justify-content:flex-start}
-  .hero-inner{align-items:center}
-  .hero-pill{font-size:.82rem;padding:.45rem .9rem}
-  .hero h1{margin-top:1.2rem;line-height:1.02}
-  .hero-sub{margin:1.2rem auto 1.9rem;font-size:1.02rem}
+  /* HERO: altura natural, respiro certo, texto centralizado e maior */
+  .hero{min-height:auto;padding:126px var(--gutter) 76px;justify-content:flex-start}
+  .hero-inner{align-items:center;text-align:center}
+  .hero-pill{font-size:.86rem;padding:.5rem 1rem}
+  .hero h1{margin-top:1.3rem;line-height:1.04}
+  .hero-sub{margin:1.3rem auto 2rem;font-size:1.12rem;line-height:1.55;max-width:34ch}
   .hero-actions{flex-direction:column;width:100%;gap:.8rem}
-  .hero-actions .btn{width:100%;justify-content:center;padding:1.05rem 1.2rem}
+  .hero-actions .btn{width:100%;justify-content:center;padding:1.1rem 1.2rem;font-size:1.05rem}
 
   /* espaçamento vertical geral menor */
   .section{padding-block:clamp(56px,13vw,76px)}
-  .head-row{margin-bottom:32px}
+
+  /* Cabeçalhos de seção: centralizados, mais legíveis */
+  .head-row{flex-direction:column;align-items:center;text-align:center;gap:1rem;margin-bottom:36px}
+  .head-row h2{margin-top:.7rem;line-height:1.05}
   .head-row h2 br{display:none}
-  .lead{font-size:1rem}
+  .lead{font-size:1.08rem;line-height:1.55;max-width:36ch;margin-inline:auto}
+  .eyebrow{justify-content:center}
 
-  /* STATS: 2 colunas enxutas */
+  /* STATS: 2 colunas enxutas, números maiores */
   .stats-grid{grid-template-columns:1fr 1fr}
-  .stat{padding:26px 20px}
-  .stat .num{font-size:clamp(2.2rem,7vw,3rem)}
-  .stat .lab{font-size:.9rem}
+  .stat{padding:28px 20px;text-align:center}
+  .stat .num{font-size:clamp(2.6rem,9vw,3.3rem)}
+  .stat .lab{font-size:.95rem;line-height:1.4;margin-inline:auto}
 
-  /* SERVIÇOS: card um pouco mais estreito, hint centralizado */
-  .svc{width:78vw;min-height:0;padding:26px}
-  .svc h3{margin:.7rem 0 .6rem}
+  /* SERVIÇOS: card mais largo e legível, hint centralizado */
+  .svc{width:84vw;min-height:0;padding:28px}
+  .svc h3{margin:.8rem 0 .65rem;font-size:1.35rem}
+  .svc p{font-size:1.02rem;line-height:1.5}
   .svc .tag{padding-top:1.1rem}
   .marquee-hint{justify-content:center;text-align:center}
 
-  /* SOBRE */
+  /* SOBRE: bloco centralizado, texto maior */
+  .about-grid{text-align:center}
+  .about .eyebrow{justify-content:center}
+  .about h2{text-align:center}
   .about h2 br{display:none}
-  .about p{font-size:1.05rem}
-  .mini-list{grid-template-columns:1fr}
+  .about p{font-size:1.1rem;line-height:1.6;margin-inline:auto}
+  .mini-list{grid-template-columns:1fr;justify-items:center;text-align:left;max-width:280px;margin-inline:auto}
   .about-badge{left:auto;right:14px;bottom:-14px;padding:14px 18px}
   .about .btn{width:100%;justify-content:center}
+  .about .sign{text-align:center}
 
-  /* MANIFESTO */
+  /* MANIFESTO: centralizado e mais impactante */
+  .manifesto{text-align:center}
+  .manifesto .wrap{display:flex;flex-direction:column;align-items:center}
   .manifesto .big br{display:none}
-  .manifesto .big{font-size:clamp(2rem,9vw,3rem)}
+  .manifesto .big{font-size:clamp(2.3rem,10vw,3.2rem);max-width:16ch}
+  .manifesto .sub{font-size:1.1rem;line-height:1.6;margin-inline:auto}
 
-  /* CURSOS */
+  /* CURSOS & PROMPTS */
+  .block-title{flex-direction:column;align-items:center;text-align:center;gap:.4rem;margin-bottom:1.6rem}
   .course{flex-direction:column;align-items:flex-start;gap:1rem}
+  .course .ct h4{font-size:1.25rem}
+  .course .ct p{font-size:1rem}
   .course .btn{width:100%;justify-content:center}
-  .block-title{margin-bottom:1.4rem}
+  .prompt .meta h4{font-size:1.3rem}
 
-  /* CTA */
+  /* CTA: mais espaço e texto centralizado maior */
+  .cta h2{font-size:clamp(2.3rem,9vw,3.2rem)}
   .cta h2 br{display:none}
+  .cta p{font-size:1.1rem;line-height:1.6}
   .cta-actions{flex-direction:column;width:100%}
-  .cta-actions .btn{width:100%;justify-content:center}
+  .cta-actions .btn{width:100%;justify-content:center;font-size:1.05rem}
 
-  /* FOOTER */
-  .foot-top{grid-template-columns:1fr;gap:1.8rem}
-  .foot-bottom{flex-direction:column;gap:.5rem}
+  /* FOOTER: centralizado, mais legível */
+  .foot-top{grid-template-columns:1fr;gap:2.2rem;text-align:center}
+  .foot .brand{justify-content:center}
+  .foot-col h5{text-align:center}
+  .foot-col a{text-align:center}
+  .foot-bottom{flex-direction:column;gap:.6rem;text-align:center}
 
   /* menos custo de blur no celular */
   .neb{filter:blur(42px)}
@@ -434,7 +456,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 
 /* telas bem pequenas */
 @media (max-width:380px){
-  .hero h1{font-size:2.2rem}
+  .hero h1{font-size:2.5rem}
   .brand span{font-size:1.2rem}
 }
 
