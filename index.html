@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TENKS — Agência de Marketing e Performance</title>
+<meta name="description" content="TENKS é a agência de marketing que transforma ideias ousadas em resultados reais. 14 anos liderando times, marcas e campanhas. Serviços, cursos e prompts de IA." />
+<link rel="icon" href="logo.jpg" />
+
+<!-- Fontes: Archivo (grotesca pesada, cara Swiss/agência) + Caveat (assinatura à mão, igual aos criativos da marca) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   TENKS — tokens de marca
+   Preto #121212 · Laranja #e75533
+   ============================================================ */
+:root{
+  --ink:#121212;
+  --ink-2:#171716;
+  --ink-3:#1f1e1d;
+  --flame:#e75533;
+  --flame-hi:#ff7a54;
+  --flame-deep:#bd3a1f;
+  --paper:#f4f2ee;
+  --paper-2:#e8e4dc;
+  --white:#ffffff;
+  --muted:#a2a09b;      /* texto secundário sobre escuro */
+  --ink-muted:#5b5852;  /* texto secundário sobre claro  */
+  --line:rgba(255,255,255,.12);
+
+  --maxw:1220px;
+  --gutter:clamp(20px,5vw,64px);
+
+  /* escala tipográfica fluida */
+  --t-hero:clamp(2.3rem, 1.2rem + 4.4vw, 5.2rem);
+  --t-h2:clamp(2rem, 1rem + 3.6vw, 3.9rem);
+  --t-h3:clamp(1.3rem,.9rem + 1.4vw, 1.9rem);
+  --t-lead:clamp(1.05rem,.95rem + .5vw, 1.35rem);
+
+  --ease:cubic-bezier(.2,.75,.2,1);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--white);
+  font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-weight:400;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--flame);color:var(--white)}
+
+.display{
+  font-weight:900;
+  font-stretch:125%;
+  line-height:.92;
+  letter-spacing:-.02em;
+  text-transform:none;
+}
+.flame{color:var(--flame)}
+.script{font-family:"Caveat",cursive;font-weight:700;font-stretch:100%}
+
+/* ---------- estrutura ---------- */
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+.section{padding-block:clamp(72px,10vw,140px)}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.6em;
+  font-size:.8rem;font-weight:600;letter-spacing:.02em;
+  color:var(--flame);
+}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--flame)}
+
+.lead{font-size:var(--t-lead);color:var(--muted);max-width:56ch}
+
+/* ---------- botões ---------- */
+.btn{
+  --bg:var(--flame);--fg:#fff;
+  position:relative;display:inline-flex;align-items:center;gap:.65em;
+  padding:1rem 1.7rem;border-radius:999px;
+  background:var(--bg);color:var(--fg);
+  font-weight:700;font-size:1rem;letter-spacing:-.01em;
+  border:1px solid transparent;cursor:pointer;
+  transition:transform .25s var(--ease), background .25s, box-shadow .25s, color .25s;
+  will-change:transform;
+}
+.btn:hover{box-shadow:0 12px 34px -12px rgba(231,85,51,.75)}
+.btn .arrow{transition:transform .3s var(--ease)}
+.btn:hover .arrow{transform:translateX(4px)}
+.btn.ghost{--bg:transparent;--fg:#fff;border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--flame);box-shadow:none}
+.btn.dark{--bg:var(--ink);--fg:#fff}
+.btn.solidwhite{--bg:#fff;--fg:var(--ink)}
+.btn.sm{padding:.72rem 1.15rem;font-size:.92rem}
+
+a.textlink{
+  color:var(--flame);font-weight:600;
+  display:inline-flex;align-items:center;gap:.4em;
+}
+a.textlink .arrow{transition:transform .3s var(--ease)}
+a.textlink:hover .arrow{transform:translateX(4px)}
+
+:focus-visible{outline:3px solid var(--flame-hi);outline-offset:3px;border-radius:6px}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px var(--gutter);
+  transition:background .35s,backdrop-filter .35s,padding .35s,border-color .35s;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(18,18,18,.72);
+  backdrop-filter:blur(14px) saturate(140%);
+  border-bottom-color:var(--line);
+  padding-block:12px;
+}
+.brand{display:flex;align-items:center;gap:.7rem;font-weight:900;font-stretch:125%;letter-spacing:-.03em;font-size:1.35rem}
+.brand img{width:38px;height:38px;border-radius:10px;box-shadow:0 6px 20px -8px rgba(231,85,51,.7)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-weight:500;font-size:.98rem;color:#e9e7e2;position:relative;padding-block:4px}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--flame);transition:width .3s var(--ease)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{display:flex;align-items:center;gap:1rem}
+
+.menu-btn{display:none;background:none;border:0;cursor:pointer;padding:8px;color:#fff}
+.menu-btn span{display:block;width:26px;height:2px;background:#fff;margin:5px 0;transition:.3s}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ============================================================
+   HERO — nebulosa laranja + texto em degradê + streaks
+   ============================================================ */
+.hero{
+  position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:120px var(--gutter) clamp(60px,9vh,120px);
+  overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(60% 46% at 50% 20%, rgba(255,168,86,.30), transparent 62%),
+    radial-gradient(80% 60% at 50% 8%, rgba(231,85,51,.26), transparent 66%),
+    radial-gradient(120% 120% at 50% 130%, #080706, transparent 55%),
+    #080706;
+}
+/* nebulosa: nuvens laranja que derivam devagar */
+.neb{position:absolute;inset:-25%;z-index:-2;pointer-events:none;filter:blur(60px)}
+.cloud{position:absolute;border-radius:50%;mix-blend-mode:screen;opacity:.85;animation:cloudDrift 26s var(--ease) infinite}
+.cloud.c1{width:52vmax;height:52vmax;left:6%;top:0;background:radial-gradient(circle,rgba(231,85,51,.55),transparent 62%);animation-duration:30s}
+.cloud.c2{width:44vmax;height:44vmax;right:2%;top:6%;background:radial-gradient(circle,rgba(255,150,74,.5),transparent 62%);animation-duration:24s;animation-delay:-8s}
+.cloud.c3{width:60vmax;height:60vmax;left:24%;top:-8%;background:radial-gradient(circle,rgba(255,120,60,.4),transparent 60%);animation-duration:34s;animation-delay:-14s}
+.cloud.c4{width:38vmax;height:38vmax;left:40%;top:22%;background:radial-gradient(circle,rgba(189,58,31,.5),transparent 60%);animation-duration:28s;animation-delay:-5s}
+@keyframes cloudDrift{
+  0%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(6%,-4%) scale(1.12)}
+  66%{transform:translate(-5%,5%) scale(.95)}
+  100%{transform:translate(0,0) scale(1)}
+}
+/* streaks horizontais de luz */
+.streaks{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.streak{position:absolute;left:-30%;width:160%;height:1.5px;
+  background:linear-gradient(90deg,transparent,rgba(255,190,140,.85),rgba(255,255,255,.6),transparent);
+  filter:drop-shadow(0 0 6px rgba(255,150,90,.7));opacity:0;
+  animation:streakSweep 7s var(--ease) infinite}
+.streak.s1{top:46%;animation-delay:.4s}
+.streak.s2{top:52%;width:120%;left:-10%;animation-delay:2.4s;animation-duration:8s}
+.streak.s3{top:58%;width:90%;left:6%;animation-delay:4.2s;animation-duration:6.5s;height:1px}
+.streak.s4{top:49%;width:70%;left:20%;animation-delay:5.6s;animation-duration:9s}
+@keyframes streakSweep{
+  0%{transform:translateX(-20%);opacity:0}
+  12%{opacity:1}
+  55%{opacity:.9}
+  100%{transform:translateX(20%);opacity:0}
+}
+/* grão sutil */
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:-1;opacity:.5;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+/* leve escurecimento central p/ leitura */
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(50% 46% at 50% 52%, rgba(8,7,6,.5), transparent 72%);
+}
+
+.hero-inner{position:relative;z-index:2;max-width:1000px;margin-inline:auto;width:100%;
+  display:flex;flex-direction:column;align-items:center}
+
+/* pill / selo */
+.hero-pill{
+  display:inline-flex;align-items:center;gap:.55em;
+  padding:.5rem 1.1rem;border-radius:999px;
+  border:1px solid rgba(255,160,90,.4);
+  background:rgba(255,140,70,.08);backdrop-filter:blur(6px);
+  font-size:.9rem;font-weight:500;color:#ffd6b0;
+  opacity:0;animation:fadeUp .7s .05s var(--ease) forwards;
+}
+.hero-pill .spark{color:var(--flame-hi)}
+
+.hero h1{
+  margin:1.6rem 0 0;font-size:var(--t-hero);
+  font-weight:900;font-stretch:125%;line-height:.94;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#fff 0%,#ffd9a8 42%,#ff8f52 74%,#e75533 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 6px 30px rgba(231,85,51,.25));
+}
+.hero h1 .row{display:block;overflow:hidden}
+.hero h1 .row > span{display:inline-block;transform:translateY(115%);animation:rise .9s var(--ease) forwards}
+.hero h1 .row:nth-child(1) > span{animation-delay:.18s}
+.hero h1 .row:nth-child(2) > span{animation-delay:.30s}
+.hero h1 .row:nth-child(3) > span{animation-delay:.42s}
+@keyframes rise{to{transform:translateY(0)}}
+
+.hero-sub{max-width:56ch;margin:1.6rem auto 2.4rem;font-size:var(--t-lead);color:#e7ded4;
+  opacity:0;animation:fadeUp .8s .62s var(--ease) forwards}
+.hero-actions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;
+  opacity:0;animation:fadeUp .8s .74s var(--ease) forwards}
+.btn.glow{background:linear-gradient(180deg,#ff8a3d,#e75533);box-shadow:0 14px 40px -12px rgba(231,85,51,.8)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+.scrollcue{
+  position:absolute;left:50%;translate:-50% 0;bottom:26px;z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--muted);font-size:.82rem;
+  opacity:0;animation:fadeUp .8s 1s var(--ease) forwards;
+}
+.scrollcue .dot{width:22px;height:34px;border:1.5px solid var(--muted);border-radius:12px;position:relative}
+.scrollcue .dot::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:6px;background:var(--flame);border-radius:2px;transform:translateX(-50%);animation:scrolldot 1.6s infinite}
+@keyframes scrolldot{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+.stats{border-top:1px solid var(--line);background:var(--ink)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.stat{background:var(--ink);padding:clamp(28px,4vw,48px) clamp(20px,3vw,40px)}
+.stat .num{font-size:clamp(2.4rem,1.4rem+3.2vw,4.2rem);font-weight:900;font-stretch:125%;line-height:1;letter-spacing:-.03em}
+.stat .num .flame{color:var(--flame)}
+.stat .lab{margin-top:.7rem;color:var(--muted);font-size:.98rem;max-width:22ch}
+
+/* ============================================================
+   SERVIÇOS — esteira horizontal (marquee) com câmera lenta no hover
+   ============================================================ */
+.head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:clamp(36px,5vw,64px)}
+.head-row h2{margin:.6rem 0 0;font-size:var(--t-h2)}
+
+.svc-marquee{position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);}
+.svc-track{display:flex;gap:22px;width:max-content;will-change:transform;padding:32px var(--gutter) 60px}
+.svc{
+  flex:0 0 auto;width:clamp(260px,80vw,340px);min-height:300px;
+  background:var(--ink-2);border:1px solid var(--line);border-radius:22px;
+  padding:clamp(26px,3vw,36px);display:flex;flex-direction:column;position:relative;overflow:hidden;
+  transition:transform .4s var(--ease),border-color .4s,background .4s,box-shadow .4s;
+}
+.svc:hover{transform:translateY(-8px);border-color:var(--flame);background:var(--ink-3);
+  box-shadow:0 26px 60px -30px rgba(231,85,51,.6)}
+.svc .idx{font-size:.85rem;color:var(--muted);font-weight:600;letter-spacing:.02em}
+.svc h3{font-size:var(--t-h3);font-weight:800;font-stretch:110%;letter-spacing:-.02em;margin:.9rem 0 .7rem}
+.svc p{color:var(--muted);margin:0;font-size:1rem}
+.svc .tag{margin-top:auto;padding-top:1.4rem;font-size:.8rem;color:var(--flame);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.svc.feature{background:linear-gradient(155deg,var(--flame-deep),var(--flame));border-color:transparent;color:#fff}
+.svc.feature .idx,.svc.feature p{color:rgba(255,255,255,.9)}
+.svc.feature .tag{color:#fff}
+.svc.feature:hover{background:linear-gradient(155deg,#a83318,var(--flame));box-shadow:0 26px 60px -26px rgba(231,85,51,.85)}
+.marquee-hint{margin-top:1.4rem;color:var(--muted);font-size:.85rem;display:flex;align-items:center;gap:.5rem}
+
+/* ============================================================
+   SOBRE (fundo claro)
+   ============================================================ */
+.about{background:var(--paper);color:var(--ink)}
+.about .lead,.about .eyebrow{}
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,72px);align-items:center}
+.about h2{font-size:var(--t-h2);margin:.6rem 0 1.4rem;color:var(--ink)}
+.about p{color:var(--ink-muted);font-size:var(--t-lead);max-width:52ch;margin:0 0 1.2rem}
+.about .sign{font-family:"Caveat",cursive;font-size:2rem;color:var(--flame);margin-top:.4rem}
+.about-media{position:relative}
+.about-media img{width:100%;border-radius:18px;filter:contrast(1.02)}
+.about-badge{
+  position:absolute;left:-14px;bottom:-14px;background:var(--ink);color:#fff;
+  padding:18px 22px;border-radius:16px;box-shadow:0 24px 60px -24px rgba(0,0,0,.5);
+}
+.about-badge b{display:block;font-size:2.2rem;font-weight:900;font-stretch:125%;line-height:1;color:var(--flame)}
+.about-badge span{font-size:.85rem;color:var(--muted)}
+.mini-list{display:grid;grid-template-columns:1fr 1fr;gap:.8rem 1.6rem;margin:1.6rem 0 2rem}
+.mini-list li{list-style:none;display:flex;gap:.6rem;align-items:flex-start;color:var(--ink);font-weight:500}
+.mini-list li .ck{color:var(--flame);font-weight:900;flex:none}
+
+/* ============================================================
+   MANIFESTO (banda laranja)
+   ============================================================ */
+.manifesto{background:var(--flame);color:#fff;text-align:left}
+.manifesto .big{font-size:clamp(2.2rem,1rem+5vw,5.4rem);font-weight:900;font-stretch:125%;line-height:.98;letter-spacing:-.03em;max-width:20ch}
+.manifesto .big .out{color:#2a0f08}
+.manifesto .sub{margin-top:1.6rem;font-size:var(--t-lead);color:rgba(255,255,255,.9);max-width:50ch}
+
+/* ============================================================
+   CURSOS & PROMPTS
+   ============================================================ */
+.edu{background:var(--ink-2)}
+.sub-block{margin-top:clamp(56px,7vw,90px)}
+.sub-block:first-child{margin-top:0}
+.block-title{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+.block-title h3{font-size:var(--t-h3);font-weight:800;font-stretch:110%;letter-spacing:-.02em;margin:0}
+.block-title .cnt{color:var(--muted);font-size:.95rem}
+
+.course-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.course{
+  display:flex;gap:1.2rem;align-items:center;justify-content:space-between;
+  background:var(--ink);border:1px solid var(--line);border-radius:18px;
+  padding:1.5rem 1.6rem;transition:border-color .3s,transform .3s var(--ease);
+}
+.course:hover{border-color:var(--flame);transform:translateY(-3px)}
+.course .ct h4{margin:0 0 .35rem;font-size:1.2rem;font-weight:800;letter-spacing:-.01em}
+.course .ct p{margin:0;color:var(--muted);font-size:.95rem}
+.course .hubla{font-size:.75rem;color:var(--flame);font-weight:600;display:inline-block;margin-bottom:.5rem}
+
+.prompt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.prompt{
+  position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);
+  background:var(--ink);transform-style:preserve-3d;transition:transform .2s var(--ease),border-color .3s;
+}
+.prompt:hover{border-color:var(--flame)}
+.prompt-img{position:relative;aspect-ratio:1/1.04;overflow:hidden}
+.prompt-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.prompt:hover .prompt-img img{transform:scale(1.05)}
+.prompt-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(18,18,18,.9))}
+.prompt .meta{position:absolute;left:0;right:0;bottom:0;padding:1.3rem;z-index:2}
+.prompt .kicker{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--flame)}
+.prompt .meta h4{margin:.4rem 0 1rem;font-size:1.22rem;font-weight:800;letter-spacing:-.01em}
+.prompt .meta .btn{padding:.62rem 1rem;font-size:.88rem}
+
+/* ============================================================
+   CTA FINAL
+   ============================================================ */
+.cta{
+  position:relative;overflow:hidden;text-align:center;
+  background:
+    radial-gradient(90% 120% at 50% 0%,rgba(231,85,51,.4),transparent 60%),
+    linear-gradient(160deg,#141311,#2a1710 60%,#5c2414);
+}
+.cta h2{font-size:clamp(2.2rem,1rem+5vw,5rem);font-weight:900;font-stretch:125%;line-height:.98;letter-spacing:-.03em;margin:0 auto;max-width:16ch}
+.cta p{margin:1.4rem auto 2.4rem;max-width:48ch;color:#eadfd8;font-size:var(--t-lead)}
+.cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot{background:var(--ink);border-top:1px solid var(--line);padding-block:clamp(56px,7vw,88px) 32px}
+.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.4rem}
+.foot .brand{margin-bottom:1.1rem}
+.foot .tagline{font-family:"Caveat",cursive;font-size:1.8rem;color:var(--flame)}
+.foot-col h5{font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 0 1rem;font-weight:700}
+.foot-col a{display:block;color:#e2dfd9;margin-bottom:.7rem;font-size:.98rem;transition:color .2s}
+.foot-col a:hover{color:var(--flame)}
+.foot-bottom{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:var(--muted);font-size:.86rem}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width:1024px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .about-media{order:-1}
+}
+@media (max-width:860px){
+  .nav-links,.nav-cta .btn{display:none}
+  .menu-btn{display:block}
+  .nav.open .nav-links{
+    display:flex;flex-direction:column;gap:1.4rem;align-items:flex-start;
+    position:fixed;inset:64px 0 auto 0;background:rgba(18,18,18,.97);
+    backdrop-filter:blur(14px);padding:2rem var(--gutter) 2.4rem;border-bottom:1px solid var(--line);
+  }
+  .nav.open .nav-links a{font-size:1.5rem;font-weight:700}
+  .course-grid{grid-template-columns:1fr}
+  .prompt-grid{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .foot-top{grid-template-columns:1fr}
+  .hero{padding-top:120px}
+}
+
+/* Reveal on scroll (discreto) */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* Acessibilidade: menos movimento — mantém o fundo ambiente, calma as entradas */
+@media (prefers-reduced-motion:reduce){
+  .hero h1 .row > span{transform:none;animation:none}
+  .hero-pill,.hero-sub,.hero-actions,.scrollcue{opacity:1;animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <a class="brand" href="#topo" aria-label="TENKS — início">
+    <img src="logo.jpg" alt="Logo TENKS" />
+    <span>TENKS</span>
+  </a>
+  <nav class="nav-links" id="navLinks" aria-label="Navegação principal">
+    <a href="#servicos">Serviços</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#educacao">Cursos &amp; Prompts</a>
+    <a href="#contato">Contato</a>
+  </nav>
+  <div class="nav-cta">
+    <a href="#contato" class="btn sm">Começar projeto <span class="arrow">→</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="topo">
+  <div class="neb" aria-hidden="true">
+    <div class="cloud c1"></div><div class="cloud c2"></div>
+    <div class="cloud c3"></div><div class="cloud c4"></div>
+  </div>
+  <div class="streaks" aria-hidden="true">
+    <div class="streak s1"></div><div class="streak s2"></div>
+    <div class="streak s3"></div><div class="streak s4"></div>
+  </div>
+
+  <div class="hero-inner">
+    <span class="hero-pill"><span class="spark">✦</span> 14 anos liderando times e marcas</span>
+    <h1>
+      <span class="row"><span>A gente não</span></span>
+      <span class="row"><span>segue a cultura.</span></span>
+      <span class="row"><span>A gente constrói.</span></span>
+    </h1>
+    <p class="hero-sub">Estratégia, criação e crescimento pra marcas que querem ser lembradas — campanhas que conectam de verdade.</p>
+    <div class="hero-actions">
+      <a href="#servicos" class="btn glow" data-magnetic>Conhecer serviços <span class="arrow">→</span></a>
+      <a href="#educacao" class="btn ghost" data-magnetic>Cursos &amp; Prompts</a>
+    </div>
+  </div>
+
+  <div class="scrollcue" aria-hidden="true"><span class="dot"></span> role pra ver mais</div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<!-- Marquito: ajuste os números pra realidade da TENKS -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat"><div class="num"><span class="flame">14</span></div><div class="lab">anos de mercado gerindo times e resultados</div></div>
+    <div class="stat"><div class="num">+120</div><div class="lab">projetos e campanhas entregues</div></div>
+    <div class="stat"><div class="num">+40</div><div class="lab">marcas que confiaram na gente</div></div>
+    <div class="stat"><div class="num">100%</div><div class="lab">foco em ideia ousada e resultado real</div></div>
+  </div>
+</section>
+
+<!-- ===================== SERVIÇOS ===================== -->
+<section class="section" id="servicos">
+  <div class="wrap">
+    <div class="head-row reveal">
+      <div>
+        <span class="eyebrow">O que fazemos</span>
+        <h2 class="display">Serviços que viram<br>resultado, não achismo.</h2>
+      </div>
+      <p class="lead">Da estratégia à execução, a TENKS cuida da marca ponta a ponta — com time próprio, dados na mão e criação que impressiona.</p>
+    </div>
+  </div>
+
+  <div class="svc-marquee reveal" id="svcMarquee">
+    <div class="svc-track" id="svcTrack">
+      <article class="svc">
+        <span class="idx">01</span>
+        <h3>Gestão de Tráfego</h3>
+        <p>Campanhas em Meta e Google que trazem cliente qualificado e ROI que dá pra medir.</p>
+        <span class="tag">Mídia paga</span>
+      </article>
+      <article class="svc">
+        <span class="idx">02</span>
+        <h3>Social Media</h3>
+        <p>Gestão de redes e criativos que param o scroll e constroem autoridade todo dia.</p>
+        <span class="tag">Conteúdo</span>
+      </article>
+      <article class="svc">
+        <span class="idx">03</span>
+        <h3>Branding &amp; Identidade</h3>
+        <p>Posicionamento, verbal e visual: uma marca com cara própria e difícil de esquecer.</p>
+        <span class="tag">Marca</span>
+      </article>
+      <article class="svc feature">
+        <span class="idx">04</span>
+        <h3>Sites &amp; Landing Pages</h3>
+        <p>Páginas que impressionam de cara e convertem. Bateu o olho, já sabe que é feito pra vender.</p>
+        <span class="tag">Web</span>
+      </article>
+      <article class="svc">
+        <span class="idx">05</span>
+        <h3>Estratégia &amp; Consultoria</h3>
+        <p>Plano de crescimento guiado por dados — pra parar de apostar e começar a escalar.</p>
+        <span class="tag">Growth</span>
+      </article>
+      <article class="svc">
+        <span class="idx">06</span>
+        <h3>Gestão de Times</h3>
+        <p>Estrutura, processo e liderança pra montar (ou destravar) um time de alta performance.</p>
+        <span class="tag">Operação</span>
+      </article>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <p class="marquee-hint">↔ passe o mouse pra desacelerar</p>
+  </div>
+</section>
+
+<!-- ===================== SOBRE ===================== -->
+<section class="section about" id="sobre">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="reveal">
+        <span class="eyebrow">Quem está por trás</span>
+        <h2 class="display">14 anos construindo<br>marca, time e cultura.</h2>
+        <p>A TENKS nasceu de uma coisa simples: não seguir tendência por seguir. São 14 anos na área, liderando times, estruturando operações de marketing e colocando a mão na campanha junto com o cliente.</p>
+        <p>Aqui não tem fórmula pronta. Tem estratégia, criação e execução — o mesmo padrão que você tá vendo neste site.</p>
+        <ul class="mini-list">
+          <li><span class="ck">→</span> Liderança de times de marketing</li>
+          <li><span class="ck">→</span> Estratégia orientada a dados</li>
+          <li><span class="ck">→</span> Criação e conteúdo de verdade</li>
+          <li><span class="ck">→</span> Execução ponta a ponta</li>
+        </ul>
+        <a href="#contato" class="btn dark" data-magnetic>Falar com a TENKS <span class="arrow">→</span></a>
+        <div class="sign">— fundador &amp; head de estratégia</div>
+      </div>
+
+      <div class="about-media reveal">
+        <img src="empresa.jpeg" alt="Estúdio e identidade visual da TENKS" />
+        <div class="about-badge">
+          <b>14</b><span>anos gerindo times<br>&amp; campanhas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MANIFESTO ===================== -->
+<section class="section manifesto">
+  <div class="wrap reveal">
+    <p class="big display">Ideias ousadas.<br><span class="out">Resultados reais.</span></p>
+    <p class="sub">A gente não copia o que tá dando certo pros outros. Constrói o que faz sentido pra sua marca — e o que ninguém vai esquecer.</p>
+  </div>
+</section>
+
+<!-- ===================== CURSOS & PROMPTS ===================== -->
+<section class="section edu" id="educacao">
+  <div class="wrap">
+    <div class="head-row reveal">
+      <div>
+        <span class="eyebrow">Além dos serviços</span>
+        <h2 class="display">Cursos &amp; Prompts<br>de IA.</h2>
+      </div>
+      <p class="lead">O que a gente aplica todo dia, empacotado pra você. Cursos direto na Hubla e packs de prompts prontos pra criar conteúdo com IA.</p>
+    </div>
+
+    <!-- CURSOS -->
+    <div class="sub-block reveal">
+      <div class="block-title">
+        <h3>Cursos na Hubla</h3>
+        <span class="cnt">acesso direto · link oficial</span>
+      </div>
+      <div class="course-grid">
+        <!-- Marquito: troque os href="#" pelos links reais da Hubla -->
+        <a class="course" href="#" target="_blank" rel="noopener">
+          <div class="ct">
+            <span class="hubla">▸ HUBLA</span>
+            <h4>Marketing na Prática</h4>
+            <p>Da estratégia à execução: o método que roda dentro da agência.</p>
+          </div>
+          <span class="btn sm">Acessar <span class="arrow">→</span></span>
+        </a>
+        <a class="course" href="#" target="_blank" rel="noopener">
+          <div class="ct">
+            <span class="hubla">▸ HUBLA</span>
+            <h4>Gestão de Times de Alta Performance</h4>
+            <p>Como montar, liderar e escalar um time de marketing que entrega.</p>
+          </div>
+          <span class="btn sm">Acessar <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- PROMPTS -->
+    <div class="sub-block reveal">
+      <div class="block-title">
+        <h3>Packs de Prompts de IA</h3>
+        <span class="cnt">prompts prontos · é copiar, colar e criar</span>
+      </div>
+      <div class="prompt-grid">
+        <article class="prompt" data-tilt>
+          <div class="prompt-img"><img src="prompt1.jpeg" alt="Pack de prompts para criadores de conteúdo" /></div>
+          <div class="meta">
+            <span class="kicker">Parte II</span>
+            <h4>Prompts para criadores de conteúdo</h4>
+            <a href="#" target="_blank" rel="noopener" class="btn sm">Quero o pack <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="prompt" data-tilt>
+          <div class="prompt-img"><img src="prompt2.jpeg" alt="Pack de prompts para foto de perfil" /></div>
+          <div class="meta">
+            <span class="kicker">Parte II</span>
+            <h4>Prompts para foto de perfil</h4>
+            <a href="#" target="_blank" rel="noopener" class="btn sm">Quero o pack <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="prompt" data-tilt>
+          <div class="prompt-img"><img src="prompt3.jpeg" alt="Pack de prompts para foto de perfil, volume 2" /></div>
+          <div class="meta">
+            <span class="kicker">Novo</span>
+            <h4>Foto de perfil · Vol. 2</h4>
+            <a href="#" target="_blank" rel="noopener" class="btn sm">Quero o pack <span class="arrow">→</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="section cta" id="contato">
+  <div class="wrap reveal">
+    <h2 class="display">Pronto pra construir<br>algo que impressiona?</h2>
+    <p>Seja marketing completo, um site que converte ou os nossos cursos — bora conversar. A TENKS responde rápido.</p>
+    <div class="cta-actions">
+      <!-- Marquito: coloque o número/WhatsApp e o @ reais -->
+      <a href="https://wa.me/55" target="_blank" rel="noopener" class="btn solidwhite" data-magnetic>Chamar no WhatsApp <span class="arrow">→</span></a>
+      <a href="https://instagram.com/agenciatenks" target="_blank" rel="noopener" class="btn ghost" data-magnetic>@agenciatenks</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <a class="brand" href="#topo"><img src="logo.jpg" alt="Logo TENKS" /><span>TENKS</span></a>
+        <div class="tagline">Crie o que conecta.</div>
+      </div>
+      <div class="foot-col">
+        <h5>Navegar</h5>
+        <a href="#servicos">Serviços</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#educacao">Cursos &amp; Prompts</a>
+        <a href="#contato">Contato</a>
+      </div>
+      <div class="foot-col">
+        <h5>Conectar</h5>
+        <a href="https://instagram.com/agenciatenks" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/55" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="#" target="_blank" rel="noopener">Hubla</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> TENKS · Agência de Marketing e Performance.</span>
+      <span>Ideias ousadas. Resultados reais.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- nav condensa no scroll ---- */
+  var nav = document.getElementById("nav");
+  var onScroll = function(){ nav.classList.toggle("scrolled", window.scrollY > 24); };
+  onScroll(); window.addEventListener("scroll", onScroll, {passive:true});
+
+  /* ---- menu mobile ---- */
+  var mBtn = document.getElementById("menuBtn");
+  mBtn.addEventListener("click", function(){
+    var open = nav.classList.toggle("open");
+    mBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    mBtn.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+  });
+  document.querySelectorAll("#navLinks a").forEach(function(a){
+    a.addEventListener("click", function(){
+      nav.classList.remove("open");
+      mBtn.setAttribute("aria-expanded","false");
+    });
+  });
+
+  /* ---- reveal on scroll (discreto) ---- */
+  if("IntersectionObserver" in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, {threshold:.14, rootMargin:"0px 0px -8% 0px"});
+    document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("in"); });
+  }
+
+  var finePointer = window.matchMedia("(pointer:fine)").matches;
+
+  /* ---- botões magnéticos (padrão TENKS) ---- */
+  if(finePointer && !reduce){
+    document.querySelectorAll("[data-magnetic]").forEach(function(btn){
+      var str = 0.28;
+      btn.addEventListener("mousemove", function(e){
+        var r = btn.getBoundingClientRect();
+        var x = e.clientX - r.left - r.width/2;
+        var y = e.clientY - r.top - r.height/2;
+        btn.style.transform = "translate("+(x*str)+"px,"+(y*str)+"px)";
+      });
+      btn.addEventListener("mouseleave", function(){ btn.style.transform = "translate(0,0)"; });
+    });
+
+    /* ---- tilt nos cards de prompt (padrão TENKS) ---- */
+    document.querySelectorAll("[data-tilt]").forEach(function(card){
+      var max = 6;
+      card.addEventListener("mousemove", function(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left)/r.width - .5;
+        var py = (e.clientY - r.top)/r.height - .5;
+        card.style.transform = "perspective(900px) rotateX("+(-py*max)+"deg) rotateY("+(px*max)+"deg)";
+      });
+      card.addEventListener("mouseleave", function(){ card.style.transform = "perspective(900px) rotateX(0) rotateY(0)"; });
+    });
+  }
+
+  /* ---- esteira de serviços: loop infinito + câmera lenta no hover ---- */
+  (function(){
+    var marquee = document.getElementById("svcMarquee");
+    var track = document.getElementById("svcTrack");
+    if(!marquee || !track) return;
+
+    // duplica os cards pra loop contínuo e sem emenda
+    var originals = Array.prototype.slice.call(track.children);
+    originals.forEach(function(node){
+      var clone = node.cloneNode(true);
+      clone.setAttribute("aria-hidden","true");
+      track.appendChild(clone);
+    });
+
+    // sem Web Animations API: fica estático (sem barra de scroll)
+    if(typeof track.animate !== "function") return;
+
+    var count = originals.length;
+    var anim = null, target = 1, raf, tries = 0;
+
+    function measure(){
+      var first = track.children[0].getBoundingClientRect().left;
+      var afterSet = track.children[count].getBoundingClientRect().left;
+      return afterSet - first; // avanço de 1 conjunto, já com o gap
+    }
+
+    function build(){
+      var setWidth = measure();
+      if((!setWidth || setWidth < 10) && tries++ < 60){ requestAnimationFrame(build); return; }
+      var rate = anim ? anim.playbackRate : 1;
+      if(anim) anim.cancel();
+      var dur = (setWidth / 60) * 1000; // ~60px/s
+      anim = track.animate(
+        [{transform:"translateX(0)"},{transform:"translateX(-"+setWidth+"px)"}],
+        {duration:dur, iterations:Infinity, easing:"linear"}
+      );
+      anim.playbackRate = rate;
+    }
+    build();
+
+    // hover = câmera lenta (rampa suave até 0.15x)
+    function ramp(){
+      if(!anim) return;
+      var cur = anim.playbackRate;
+      var next = cur + (target - cur) * 0.12;
+      if(Math.abs(next - target) < 0.01) next = target;
+      anim.playbackRate = next;
+      if(next !== target) raf = requestAnimationFrame(ramp);
+    }
+    function setTarget(v){ target = v; cancelAnimationFrame(raf); ramp(); }
+
+    marquee.addEventListener("mouseenter", function(){ setTarget(0.15); });
+    marquee.addEventListener("mouseleave", function(){ setTarget(1); });
+    marquee.addEventListener("touchstart", function(){ setTarget(0.15); }, {passive:true});
+    marquee.addEventListener("touchend", function(){ setTarget(1); }, {passive:true});
+
+    // recalcula ao redimensionar (largura do card muda)
+    var rt;
+    window.addEventListener("resize", function(){ clearTimeout(rt); tries = 0; rt = setTimeout(build, 200); });
+  })();
+
+  /* ---- ano no rodapé ---- */
+  document.getElementById("yr").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
