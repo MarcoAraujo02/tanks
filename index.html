@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0a0807" />
 <title>TENKS — Agência de Marketing e Performance</title>
 <meta name="description" content="TENKS é a agência de marketing que transforma ideias ousadas em resultados reais. 14 anos liderando times, marcas e campanhas. Serviços, cursos e prompts de IA." />
 <link rel="icon" href="logo.jpg" />
@@ -189,14 +190,9 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 .hero h1{
   margin:1.4rem 0 0;font-size:var(--t-hero);
   font-weight:900;font-stretch:125%;line-height:.96;letter-spacing:-.02em;
-  background:linear-gradient(180deg,#fff 0%,#ffd9a8 42%,#ff8f52 74%,#e75533 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
+  color:#f6f1ea;
 }
-/* fallback: se o navegador não recorta o degradê no texto, mostra branco */
-@supports not ((-webkit-background-clip:text) or (background-clip:text)){
-  .hero h1{color:#fff;-webkit-text-fill-color:#fff;background:none}
-}
+.hero h1 .line3{color:var(--flame)}
 .hero h1 .row{display:block;overflow:hidden}
 .hero h1 .row > span{display:inline-block;transform:translateY(115%);animation:rise .9s var(--ease) forwards}
 .hero h1 .row:nth-child(1) > span{animation-delay:.18s}
@@ -475,7 +471,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 <!-- ===================== NAV ===================== -->
 <header class="nav" id="nav">
   <a class="brand" href="#topo" aria-label="TENKS — início">
-    <img src="logo.jpg" alt="Logo TENKS" />
+    <img src="logo.jpg" alt="Logo TENKS" width="38" height="38" fetchpriority="high" />
     <span>TENKS</span>
   </a>
   <nav class="nav-links" id="navLinks" aria-label="Navegação principal">
@@ -499,7 +495,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
     <h1>
       <span class="row"><span>A gente não</span></span>
       <span class="row"><span>segue a cultura.</span></span>
-      <span class="row"><span>A gente constrói.</span></span>
+      <span class="row"><span class="line3">A gente constrói.</span></span>
     </h1>
     <p class="hero-sub">Estratégia, criação e crescimento pra marcas que querem ser lembradas — campanhas que conectam de verdade.</p>
     <div class="hero-actions">
@@ -633,7 +629,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
       </div>
 
       <div class="about-media reveal">
-        <img src="empresa.jpeg" alt="Estúdio e identidade visual da TENKS" />
+        <img src="empresa.jpeg" alt="Estúdio e identidade visual da TENKS" width="970" height="1000" loading="lazy" decoding="async" />
         <div class="about-badge">
           <b>14</b><span>anos gerindo times<br>&amp; campanhas</span>
         </div>
@@ -696,7 +692,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
       </div>
       <div class="prompt-grid">
         <article class="prompt" data-tilt>
-          <div class="prompt-img"><img src="prompt1.jpeg" alt="Pack de prompts para criadores de conteúdo" /></div>
+          <div class="prompt-img"><img src="prompt1.jpeg" alt="Pack de prompts para criadores de conteúdo" loading="lazy" decoding="async" /></div>
           <div class="meta">
             <span class="kicker">Parte II</span>
             <h4>Prompts para criadores de conteúdo</h4>
@@ -705,7 +701,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
         </article>
 
         <article class="prompt" data-tilt>
-          <div class="prompt-img"><img src="prompt2.jpeg" alt="Pack de prompts para foto de perfil" /></div>
+          <div class="prompt-img"><img src="prompt2.jpeg" alt="Pack de prompts para foto de perfil" loading="lazy" decoding="async" /></div>
           <div class="meta">
             <span class="kicker">Parte II</span>
             <h4>Prompts para foto de perfil</h4>
@@ -714,7 +710,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
         </article>
 
         <article class="prompt" data-tilt>
-          <div class="prompt-img"><img src="prompt3.jpeg" alt="Pack de prompts para foto de perfil, volume 2" /></div>
+          <div class="prompt-img"><img src="prompt3.jpeg" alt="Pack de prompts para foto de perfil, volume 2" loading="lazy" decoding="async" /></div>
           <div class="meta">
             <span class="kicker">Novo</span>
             <h4>Foto de perfil · Vol. 2</h4>
@@ -744,7 +740,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
   <div class="wrap">
     <div class="foot-top">
       <div>
-        <a class="brand" href="#topo"><img src="logo.jpg" alt="Logo TENKS" /><span>TENKS</span></a>
+        <a class="brand" href="#topo"><img src="logo.jpg" alt="Logo TENKS" width="38" height="38" loading="lazy" decoding="async" /><span>TENKS</span></a>
         <div class="tagline">Crie o que conecta.</div>
       </div>
       <div class="foot-col">
