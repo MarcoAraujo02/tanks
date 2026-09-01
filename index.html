@@ -168,15 +168,78 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 
 /* SOBRE */
 .about{background:var(--paper);color:var(--ink)}
-.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,72px);align-items:center}
+.about-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(32px,5vw,72px);align-items:center}
 .about h2{font-size:var(--t-h2);margin:.6rem 0 1.4rem;color:var(--ink)}
 .about p{color:var(--ink-muted);font-size:var(--t-lead);max-width:52ch;margin:0 0 1.2rem}
 .about .sign{font-family:"Caveat",cursive;font-size:2rem;color:var(--flame);margin-top:.4rem}
-.about-media{position:relative}
-.about-media img{width:100%;border-radius:18px;filter:contrast(1.02);aspect-ratio:4/5;object-fit:cover;object-position:center top}
-.about-badge{position:absolute;left:-14px;bottom:-14px;background:var(--ink);color:#fff;padding:18px 22px;border-radius:16px;box-shadow:0 24px 60px -24px rgba(0,0,0,.5)}
-.about-badge b{display:block;font-size:2.2rem;font-weight:900;font-stretch:125%;line-height:1;color:var(--flame)}
-.about-badge span{font-size:.85rem;color:var(--muted)}
+.about-media{
+  position:relative;
+  width:100%;
+  max-width:520px;
+  margin-inline:auto;
+  overflow:hidden;
+  border-radius:28px;
+  isolation:isolate;
+}
+
+.about-media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      90deg,
+      var(--paper) 0%,
+      rgba(244,242,238,.75) 7%,
+      rgba(244,242,238,.15) 24%,
+      transparent 42%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.05),
+      transparent 25%,
+      rgba(0,0,0,.15) 100%
+    );
+  z-index:2;
+}
+
+.about-media img{
+  width:100%;
+  height:780px;
+  display:block;
+  object-fit:cover;
+  object-position:center 20%;
+  border-radius:28px;
+  filter:contrast(1.03) saturate(.95);
+  box-shadow:0 30px 80px -35px rgba(0,0,0,.45);
+  transform:scale(1.01);
+}
+
+.about-badge{
+  position:absolute;
+  left:22px;
+  bottom:22px;
+  z-index:3;
+  background:rgba(18,18,18,.94);
+  color:#fff;
+  padding:18px 22px;
+  border-radius:16px;
+  box-shadow:0 20px 50px -20px rgba(0,0,0,.5);
+}
+
+.about-badge b{
+  display:block;
+  font-size:2.2rem;
+  font-weight:900;
+  line-height:1;
+  color:var(--flame);
+}
+
+.about-badge span{
+  font-size:.85rem;
+  color:var(--muted);
+}
 .mini-list{display:grid;grid-template-columns:1fr 1fr;gap:.8rem 1.6rem;margin:1.6rem 0 2rem}
 .mini-list li{list-style:none;display:flex;gap:.6rem;align-items:flex-start;color:var(--ink);font-weight:500}
 .mini-list li .ck{color:var(--flame);font-weight:900;flex:none}
@@ -248,8 +311,19 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 @media (max-width:1024px){
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .about-grid{grid-template-columns:1fr;gap:40px}
-  .about-media{order:-1;max-width:420px;margin-inline:auto}
-  .about-media img{width:100%;aspect-ratio:4/5;height:auto;object-fit:cover;object-position:50% 22%}
+ .about-media{
+  order:-1;
+  max-width:420px;
+  margin-inline:auto;
+}
+
+.about-media img{
+  width:100%;
+  height:560px;
+  aspect-ratio:auto;
+  object-fit:cover;
+  object-position:center 20%;
+}
   .course-grid{grid-template-columns:1fr}
 }
 @media (max-width:860px){
@@ -269,6 +343,30 @@ a.textlink:hover .arrow{transform:translateX(4px)}
   :root{--gutter:20px;--t-hero:clamp(2.6rem, 1.4rem + 8vw, 3.6rem);--t-h2:clamp(1.9rem, 1.3rem + 4vw, 2.6rem);--t-lead:1.05rem}
   .hero{min-height:auto;padding:120px var(--gutter) 72px;justify-content:flex-start}
   .hero-inner{align-items:center}
+   .about-media{
+    max-width:100%;
+    border-radius:22px;
+  }
+
+  .about-media img{
+    height:500px;
+    border-radius:22px;
+  }
+
+  .about-media::after{
+    background:
+      linear-gradient(
+        90deg,
+        var(--paper) 0%,
+        rgba(244,242,238,.35) 18%,
+        transparent 40%
+      ),
+      linear-gradient(
+        180deg,
+        transparent 60%,
+        rgba(0,0,0,.18)
+      );
+  }
   .hero-pill{font-size:.82rem;padding:.45rem .9rem}
   .hero h1{margin-top:1.2rem;line-height:1.04}
   .hero-sub{margin:1.2rem auto 1.9rem;font-size:1.12rem;line-height:1.5}
@@ -351,7 +449,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
       <span class="row"><span>Você imagina.</span></span>
       <span class="row"><span class="line2">A gente faz acontecer.</span></span>
     </h1>
-    <p class="hero-sub">Marketing pra marcas que não querem passar despercebidas. Estratégia, criação, tráfego, conteúdo, branding e tecnologia num lugar só — a gente transforma ideia em marca que chama atenção e gera negócio.</p>
+    <p class="hero-sub">Marketing pra marcas que não querem passar despercebidas. Estratégia, criação, tráfego, conteúdo, branding e tecnologia num lugar só. A gente transforma ideia em marca que chama atenção e gera negócio.</p>
     <div class="hero-actions">
       <a href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener" class="btn glow" data-magnetic>Fale com nosso time <span class="arrow">→</span></a>
       <a href="#servicos" class="btn ghost" data-magnetic>Veja o que a TENKS faz <span class="arrow">↓</span></a>
@@ -440,7 +538,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
       </article>
       <article class="prob">
         <h3><span class="q">“</span>Faço marketing, mas não sei se é o certo.<span class="q">”</span></h3>
-        <p>Posta, anuncia, testa uma coisa aqui e outra ali… e no fim do mês segue sem saber se avançou. A gente analisa o cenário, acha os gargalos e define o que fazer, o que parar e onde focar. Às vezes não falta marketing — falta direção.</p>
+        <p>Posta, anuncia, testa uma coisa aqui e outra ali… e no fim do mês segue sem saber se avançou. A gente analisa o cenário, acha os gargalos e define o que fazer, o que parar e onde focar. Às vezes não falta marketing. Falta direção.</p>
         <a class="textlink" href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener">Quero uma direção pro meu marketing <span class="arrow">→</span></a>
       </article>
     </div>
@@ -455,14 +553,14 @@ a.textlink:hover .arrow{transform:translateX(4px)}
         <span class="eyebrow">Como a TENKS funciona</span>
         <h2 class="display">Do problema<br>ao resultado.</h2>
       </div>
-      <p class="lead">Não existe mágica. Existe processo. Cada etapa tem um porquê — e leva a marca de onde ela está pra onde ela quer chegar.</p>
+      <p class="lead">Não existe mágica. Existe processo. Cada etapa tem um porquê, e leva a marca de onde ela está pra onde ela quer chegar.</p>
     </div>
 
     <div class="timeline reveal">
       <div class="tl-step"><div class="dot">01</div><div class="tl-body"><h4>Entender</h4><p>Antes de criar qualquer coisa, entendemos seu negócio, mercado, público e o que está travando o crescimento.</p></div></div>
       <div class="tl-step"><div class="dot">02</div><div class="tl-body"><h4>Estrategizar</h4><p>Definimos posicionamento, prioridades, canais, campanhas e o que realmente merece atenção.</p></div></div>
       <div class="tl-step"><div class="dot">03</div><div class="tl-body"><h4>Criar</h4><p>Viramos estratégia em ideias, campanhas, conteúdo, marca e anúncios que fazem prestar atenção.</p></div></div>
-      <div class="tl-step"><div class="dot">04</div><div class="tl-body"><h4>Executar</h4><p>Colocamos tudo pra rodar — sem depender de uma apresentação bonita que nunca sai do PowerPoint.</p></div></div>
+      <div class="tl-step"><div class="dot">04</div><div class="tl-body"><h4>Executar</h4><p>Colocamos tudo pra rodar, sem depender de uma apresentação bonita que nunca sai do PowerPoint.</p></div></div>
       <div class="tl-step"><div class="dot">05</div><div class="tl-body"><h4>Otimizar</h4><p>Medimos, aprendemos, ajustamos e buscamos oportunidades melhores. Marketing bom não acaba quando a campanha vai ao ar.</p></div></div>
     </div>
   </div>
@@ -476,17 +574,17 @@ a.textlink:hover .arrow{transform:translateX(4px)}
         <span class="eyebrow">Você tem um problema</span>
         <h2 class="display">A gente tem várias<br>formas de resolver.</h2>
       </div>
-      <p class="lead">Não empurramos serviço. Montamos a combinação certa pra cada momento da sua empresa — da estratégia à execução, ponta a ponta.</p>
+      <p class="lead">Não empurramos serviço. Montamos a combinação certa pra cada momento da sua empresa. Da estratégia à execução, ponta a ponta.</p>
     </div>
   </div>
 
   <div class="svc-marquee reveal" id="svcMarquee">
     <div class="svc-track" id="svcTrack">
-      <article class="svc"><span class="idx">01</span><h3>Gestão de Tráfego</h3><p>Campanhas em Meta e Google que trazem cliente qualificado e ROI que dá pra medir.</p><span class="tag">Mídia paga</span></article>
+      <article class="svc feature"><span class="idx">01</span><h3>Gestão de Tráfego</h3><p>Campanhas em Meta e Google que trazem cliente qualificado e ROI que dá pra medir.</p><span class="tag">Mídia paga</span></article>
       <article class="svc"><span class="idx">02</span><h3>Social Media</h3><p>Gestão de redes e criativos que param o scroll e constroem autoridade todo dia.</p><span class="tag">Conteúdo</span></article>
-      <article class="svc"><span class="idx">03</span><h3>Branding &amp; Identidade</h3><p>Posicionamento, verbal e visual: uma marca com cara própria e difícil de esquecer.</p><span class="tag">Marca</span></article>
-      <article class="svc feature"><span class="idx">04</span><h3>Sites &amp; Landing Pages</h3><p>Páginas que impressionam de cara e convertem. Bateu o olho, já sabe que é feito pra vender.</p><span class="tag">Web</span></article>
-      <article class="svc"><span class="idx">05</span><h3>Estratégia &amp; Consultoria</h3><p>Plano de crescimento guiado por dados — pra parar de apostar e começar a escalar.</p><span class="tag">Growth</span></article>
+      <article class="svc feature"><span class="idx">03</span><h3>Branding &amp; Identidade</h3><p>Posicionamento, verbal e visual: uma marca com cara própria e difícil de esquecer.</p><span class="tag">Marca</span></article>
+      <article class="svc"><span class="idx">04</span><h3>Sites &amp; Landing Pages</h3><p>Páginas que impressionam de cara e convertem. Bateu o olho, já sabe que é feito pra vender.</p><span class="tag">Web</span></article>
+      <article class="svc feature"><span class="idx">05</span><h3>Estratégia &amp; Consultoria</h3><p>Plano de crescimento guiado por dados, pra parar de apostar e começar a escalar.</p><span class="tag">Growth</span></article>
       <article class="svc"><span class="idx">06</span><h3>Gestão de Times</h3><p>Estrutura, processo e liderança pra montar (ou destravar) um time de alta performance.</p><span class="tag">Operação</span></article>
     </div>
   </div>
@@ -513,7 +611,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
         <span class="eyebrow">Quem está por trás</span>
         <h2 class="display">A TENKS não nasceu<br>pra ser igual às outras.</h2>
         <p>E talvez seja exatamente por isso que você chegou até aqui. São mais de 14 anos vivendo marketing por dentro: liderando times, construindo marcas, criando campanhas, testando, errando, acertando e aprendendo o que faz uma estratégia sair do papel.</p>
-        <p>A gente não vende fórmula pronta. Junta pessoas, estratégia, criatividade e tecnologia pra construir solução que faz sentido pro seu negócio. Marketing bom não precisa escolher entre ser criativo e dar resultado — pode fazer os dois.</p>
+        <p>A gente não vende fórmula pronta. Junta pessoas, estratégia, criatividade e tecnologia pra construir solução que faz sentido pro seu negócio. Marketing bom não precisa escolher entre ser criativo e dar resultado. Pode fazer os dois.</p>
         <ul class="mini-list">
           <li><span class="ck">→</span> Ideias ousadas</li>
           <li><span class="ck">→</span> Execução de verdade</li>
@@ -521,7 +619,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
           <li><span class="ck">→</span> 14+ anos na prática</li>
         </ul>
         <a href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener" class="btn dark" data-magnetic>Conhecer a TENKS <span class="arrow">→</span></a>
-        <div class="sign">— fundador &amp; head de estratégia</div>
+        <div class="sign">fundador &amp; head de estratégia</div>
       </div>
       <div class="about-media reveal">
         <img src="quem.PNG" alt="Fundador da TENKS" width="900" height="1600" loading="lazy" decoding="async" />
@@ -535,7 +633,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 <section class="section manifesto">
   <div class="wrap reveal">
     <p class="big display">Ideias ousadas.<br><span class="out">Resultados reais.</span></p>
-    <p class="sub">A gente não copia o que tá dando certo pros outros. Constrói o que faz sentido pra sua marca — e o que ninguém vai esquecer.</p>
+    <p class="sub">A gente não copia o que tá dando certo pros outros. Constrói o que faz sentido pra sua marca. E o que ninguém vai esquecer.</p>
   </div>
 </section>
 
@@ -547,7 +645,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
         <span class="eyebrow">IAs &amp; Cursos</span>
         <h2 class="display">A tecnologia que a gente<br>usa pra criar. Agora é sua.</h2>
       </div>
-      <p class="lead">A inteligência artificial mudou a forma como a gente cria — e a TENKS tá dentro dessa mudança. Parte do que usamos todo dia virou curso, método e ferramenta pra você produzir mais e criar melhor.</p>
+      <p class="lead">A inteligência artificial mudou a forma como a gente cria, e a TENKS tá dentro dessa mudança. Parte do que usamos todo dia virou curso, método e ferramenta pra você produzir mais e criar melhor.</p>
     </div>
 
     <div class="sub-block reveal">
@@ -590,7 +688,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
       <details class="faq-item"><summary>Vocês atendem quais tipos de empresa? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Trabalhamos com empresas de diferentes segmentos. Mais importante do que o nicho é entender se existe um problema de marketing que a gente pode resolver.</div></details>
       <details class="faq-item"><summary>Vocês trabalham com empresas pequenas? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Sim. O projeto precisa fazer sentido pros dois lados. Nossa recomendação depende do momento, da estrutura e do objetivo da empresa.</div></details>
       <details class="faq-item"><summary>Vocês fazem apenas social media? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Não. Social media é apenas uma parte do que fazemos. Podemos atuar em estratégia, tráfego, branding, sites, conteúdo e estruturação de marketing.</div></details>
-      <details class="faq-item"><summary>Preciso contratar todos os serviços? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Não — a ideia é justamente o contrário. Primeiro entendemos o que você precisa. Depois montamos a solução.</div></details>
+      <details class="faq-item"><summary>Preciso contratar todos os serviços? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Não. A ideia é justamente o contrário. Primeiro entendemos o que você precisa. Depois montamos a solução.</div></details>
       <details class="faq-item"><summary>Quanto custa contratar a TENKS? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Depende do projeto, dos objetivos e da estrutura necessária. Em vez de trabalhar com uma tabela engessada, a gente avalia o cenário antes de apresentar uma proposta.</div></details>
       <details class="faq-item"><summary>Posso falar com vocês antes de contratar? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Claro. O primeiro contato serve justamente pra entender o momento da sua empresa e descobrir se existe fit.</div></details>
       <details class="faq-item"><summary>E se eu não souber exatamente o que preciso? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Melhor ainda. Você não precisa chegar com a solução. Precisa chegar com o problema.</div></details>
@@ -605,7 +703,6 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 <section class="section cta" id="contato">
   <div class="wrap reveal">
     <h2 class="display">Pronto pra construir<br>algo que impressiona?</h2>
-    <p>Seja marketing completo, um site que converte ou os nossos cursos — bora conversar. A TENKS responde rápido.</p>
     <div class="cta-actions">
       <a href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener" class="btn solidwhite" data-magnetic>Chamar no WhatsApp <span class="arrow">→</span></a>
       <a href="https://instagram.com/agenciatenks" target="_blank" rel="noopener" class="btn ghost" data-magnetic>@agenciatenks</a>
