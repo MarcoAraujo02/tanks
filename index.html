@@ -348,6 +348,35 @@ a.textlink:hover .arrow{transform:translateX(4px)}
     border-radius:22px;
   }
 
+
+  @media (max-width: 768px){
+  .svc-marquee{
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-mask-image:none;
+    mask-image:none;
+    cursor:grab;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+
+  .svc-marquee::-webkit-scrollbar{
+    display:none;
+  }
+
+  .svc-track{
+    width:max-content;
+    padding:20px 20px 50px;
+    gap:16px;
+  }
+
+  .svc{
+    width:82vw;
+    max-width:320px;
+    min-height:300px;
+  }
+}
+
   .about-media img{
     height:500px;
     border-radius:22px;
@@ -588,7 +617,6 @@ a.textlink:hover .arrow{transform:translateX(4px)}
       <article class="svc"><span class="idx">06</span><h3>Gestão de Times</h3><p>Estrutura, processo e liderança pra montar (ou destravar) um time de alta performance.</p><span class="tag">Operação</span></article>
     </div>
   </div>
-  <div class="wrap"><p class="marquee-hint">↔ passe o mouse pra desacelerar</p></div>
 </section>
 
 <!-- DIAGNÓSTICO (Dobra 6) -->
@@ -845,24 +873,132 @@ a.textlink:hover .arrow{transform:translateX(4px)}
   }
 
   /* esteira de serviços */
-  (function(){
-    var marquee=document.getElementById("svcMarquee"), track=document.getElementById("svcTrack");
-    if(!marquee || !track) return;
-    var originals=Array.prototype.slice.call(track.children);
-    originals.forEach(function(n){ var c=n.cloneNode(true); c.setAttribute("aria-hidden","true"); track.appendChild(c); });
-    if(typeof track.animate!=="function") return;
-    var count=originals.length, anim=null, target=1, raf, tries=0;
-    function measure(){ return track.children[count].getBoundingClientRect().left-track.children[0].getBoundingClientRect().left; }
-    function build(){ var w=measure(); if((!w||w<10)&&tries++<60){ requestAnimationFrame(build); return; } var rate=anim?anim.playbackRate:1; if(anim) anim.cancel(); anim=track.animate([{transform:"translateX(0)"},{transform:"translateX(-"+w+"px)"}],{duration:(w/60)*1000,iterations:Infinity,easing:"linear"}); anim.playbackRate=rate; }
-    build();
-    function ramp(){ if(!anim) return; var c=anim.playbackRate,n=c+(target-c)*.12; if(Math.abs(n-target)<.01)n=target; anim.playbackRate=n; if(n!==target) raf=requestAnimationFrame(ramp); }
-    function setTarget(v){ target=v; cancelAnimationFrame(raf); ramp(); }
-    marquee.addEventListener("mouseenter", function(){ setTarget(0.15); });
-    marquee.addEventListener("mouseleave", function(){ setTarget(1); });
-    marquee.addEventListener("touchstart", function(){ setTarget(0.15); }, {passive:true});
-    marquee.addEventListener("touchend", function(){ setTarget(1); }, {passive:true});
-    var rt; window.addEventListener("resize", function(){ clearTimeout(rt); tries=0; rt=setTimeout(build,200); });
-  })();
+ /* esteira de serviços */
+(function(){
+  var marquee = document.getElementById("svcMarquee");
+  var track = document.getElementById("svcTrack");
+
+  if(!marquee || !track) return;
+
+  /* CELULAR: arrastar com o dedo */
+  if(window.matchMedia("(max-width: 768px)").matches){
+
+    marquee.style.overflowX = "auto";
+
+    var isDown = false;
+    var startX = 0;
+    var scrollLeft = 0;
+
+    marquee.addEventListener("touchstart", function(e){
+      isDown = true;
+      startX = e.touches[0].pageX;
+      scrollLeft = marquee.scrollLeft;
+    }, {passive:true});
+
+    marquee.addEventListener("touchmove", function(e){
+      if(!isDown) return;
+
+      var x = e.touches[0].pageX;
+      var walk = (startX - x) * 1.2;
+
+      marquee.scrollLeft = scrollLeft + walk;
+    }, {passive:true});
+
+    marquee.addEventListener("touchend", function(){
+      isDown = false;
+    }, {passive:true});
+
+    return;
+  }
+
+  /* PC: mantém o movimento automático */
+  var originals = Array.prototype.slice.call(track.children);
+
+  originals.forEach(function(n){
+    var c = n.cloneNode(true);
+    c.setAttribute("aria-hidden","true");
+    track.appendChild(c);
+  });
+
+  if(typeof track.animate !== "function") return;
+
+  var count = originals.length;
+  var anim = null;
+  var target = 1;
+  var raf;
+  var tries = 0;
+
+  function measure(){
+    return track.children[count].getBoundingClientRect().left -
+           track.children[0].getBoundingClientRect().left;
+  }
+
+  function build(){
+    var w = measure();
+
+    if((!w || w < 10) && tries++ < 60){
+      requestAnimationFrame(build);
+      return;
+    }
+
+    var rate = anim ? anim.playbackRate : 1;
+
+    if(anim) anim.cancel();
+
+    anim = track.animate(
+      [
+        {transform:"translateX(0)"},
+        {transform:"translateX(-"+w+"px)"}
+      ],
+      {
+        duration:(w/60)*1000,
+        iterations:Infinity,
+        easing:"linear"
+      }
+    );
+
+    anim.playbackRate = rate;
+  }
+
+  build();
+
+  function ramp(){
+    if(!anim) return;
+
+    var c = anim.playbackRate;
+    var n = c + (target-c)*.12;
+
+    if(Math.abs(n-target)<.01) n = target;
+
+    anim.playbackRate = n;
+
+    if(n !== target)
+      raf = requestAnimationFrame(ramp);
+  }
+
+  function setTarget(v){
+    target = v;
+    cancelAnimationFrame(raf);
+    ramp();
+  }
+
+  marquee.addEventListener("mouseenter", function(){
+    setTarget(0.15);
+  });
+
+  marquee.addEventListener("mouseleave", function(){
+    setTarget(1);
+  });
+
+  var rt;
+
+  window.addEventListener("resize", function(){
+    clearTimeout(rt);
+    tries = 0;
+    rt = setTimeout(build,200);
+  });
+
+})();
 
   document.getElementById("yr").textContent = new Date().getFullYear();
 })();
