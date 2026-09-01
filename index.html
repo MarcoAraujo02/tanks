@@ -142,37 +142,37 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 .menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* ============================================================
-   HERO — shader WebGL animado (nebulosa laranja/preta)
+   HERO — nebulosa laranja + texto em degradê
    ============================================================ */
+/* fallback de fundo (caso WebGL não carregue) */
 .hero{
   position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;
   text-align:center;padding:120px var(--gutter) clamp(60px,9vh,120px);
   overflow:hidden;isolation:isolate;
-  background:#080706; /* cor de base enquanto o shader inicializa */
-}
-/* canvas do shader ocupa o hero inteiro, atrás do conteúdo */
-.hero-canvas{
-  position:absolute;inset:0;z-index:-2;width:100%;height:100%;
-  display:block;touch-action:none;background:#080706;
-}
-/* fallback (sem WebGL2 ou reduced-motion “duro”): volta pro degradê estático */
-.hero.no-webgl{
   background:
     radial-gradient(60% 46% at 50% 20%, rgba(255,168,86,.30), transparent 62%),
     radial-gradient(80% 60% at 50% 8%, rgba(231,85,51,.26), transparent 66%),
     radial-gradient(120% 120% at 50% 130%, #080706, transparent 55%),
-    #080706;
+    #050403;
 }
-.hero.no-webgl .hero-canvas{display:none}
+/* shader WebGL (nebulosa/fumaça animada por GPU) */
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block;background:#050403;touch-action:none}
 /* grão sutil */
 .hero::after{
-  content:"";position:absolute;inset:0;z-index:-1;opacity:.5;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  content:"";position:absolute;inset:0;z-index:-1;opacity:.4;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
 }
-/* leve escurecimento central p/ leitura */
+/* escurecimento: preto-dominante, topo escuro atrás do menu, laranja só de brilho */
 .hero::before{
   content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:radial-gradient(50% 46% at 50% 52%, rgba(8,7,6,.5), transparent 72%);
+  background:
+    radial-gradient(58% 50% at 50% 50%, rgba(3,2,2,.5), transparent 78%),
+    linear-gradient(180deg,
+      rgba(3,2,2,.94) 0%,
+      rgba(3,2,2,.62) 16%,
+      rgba(3,2,2,.4) 42%,
+      rgba(3,2,2,.5) 72%,
+      rgba(3,2,2,.82) 100%);
 }
 
 .hero-inner{position:relative;z-index:2;max-width:1000px;margin-inline:auto;width:100%;
@@ -192,15 +192,14 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 .hero h1{
   margin:1.4rem 0 0;font-size:var(--t-hero);
   font-weight:900;font-stretch:125%;line-height:.96;letter-spacing:-.02em;
-  color:#fff; /* cor sólida garantida — sem depender de background-clip:text,
-                 que falha silenciosamente (texto invisível) em alguns
-                 webviews mobile (in-app browsers, modo economia de dados) */
+  background:linear-gradient(180deg,#fff 0%,#ffd9a8 42%,#ff8f52 74%,#e75533 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
 }
-/* "degradê" feito por cor sólida linha a linha — mesmo efeito visual,
-   sem risco de texto sumir no mobile */
-.hero h1 .row:nth-child(1){color:#fff}
-.hero h1 .row:nth-child(2){color:#ffd9a8}
-.hero h1 .row:nth-child(3){color:var(--flame-hi)}
+/* fallback: se o navegador não recorta o degradê no texto, mostra branco */
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){
+  .hero h1{color:#fff;-webkit-text-fill-color:#fff;background:none}
+}
 .hero h1 .row{display:block;overflow:hidden}
 .hero h1 .row > span{display:inline-block;transform:translateY(115%);animation:rise .9s var(--ease) forwards}
 .hero h1 .row:nth-child(1) > span{animation-delay:.18s}
@@ -208,7 +207,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 .hero h1 .row:nth-child(3) > span{animation-delay:.42s}
 @keyframes rise{to{transform:translateY(0)}}
 
-.hero-sub{max-width:56ch;margin:1.6rem auto 2.4rem;font-size:clamp(1.2rem,1rem + 1.1vw,1.65rem);line-height:1.45;color:#f0e8de;
+.hero-sub{max-width:56ch;margin:1.6rem auto 2.4rem;font-size:var(--t-lead);color:#e7ded4;
   opacity:0;animation:fadeUp .8s .62s var(--ease) forwards}
 .hero-actions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;
   opacity:0;animation:fadeUp .8s .74s var(--ease) forwards}
@@ -220,10 +219,35 @@ a.textlink:hover .arrow{transform:translateX(4px)}
    ============================================================ */
 .stats{border-top:1px solid var(--line);background:var(--ink)}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
-.stat{background:var(--ink);padding:clamp(28px,4vw,48px) clamp(20px,3vw,40px)}
-.stat .num{font-size:clamp(2.4rem,1.4rem+3.2vw,4.2rem);font-weight:900;font-stretch:125%;line-height:1;letter-spacing:-.03em}
-.stat .num .flame{color:var(--flame)}
-.stat .lab{margin-top:.7rem;color:var(--muted);font-size:.98rem;max-width:22ch}
+.stat{background:var(--ink);padding:clamp(40px,5vw,64px) clamp(20px,3vw,40px);position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;width:36px;height:4px;background:var(--flame)}
+.stat .num{
+  font-size:clamp(3.4rem,2rem+5vw,6.2rem);font-weight:900;font-stretch:125%;
+  line-height:.92;letter-spacing:-.03em;color:#fff;font-variant-numeric:tabular-nums;
+}
+.stat .num.flame{color:var(--flame)}
+.stat .lab{margin-top:1rem;color:var(--muted);font-size:1.02rem;max-width:22ch}
+
+/* ============================================================
+   CLIENTES — carrossel de logos
+   ============================================================ */
+.clients{background:var(--ink);padding-block:clamp(56px,8vw,96px)}
+.clients-title{
+  text-align:center;color:var(--muted);font-size:.95rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;margin:0 0 clamp(32px,4vw,52px)
+}
+.logo-marquee{position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.logo-track{display:flex;align-items:center;gap:clamp(40px,6vw,88px);width:max-content;will-change:transform}
+.logo-item{flex:0 0 auto;display:flex;align-items:center;justify-content:center;height:60px;opacity:.5;
+  filter:grayscale(1);transition:opacity .3s,filter .3s}
+.logo-item:hover{opacity:1;filter:none}
+.logo-item img{max-height:46px;width:auto;display:block}
+/* wordmark placeholder (troque por imagens reais) */
+.logo-wm{font-weight:800;font-stretch:110%;font-size:clamp(1.5rem,1rem+1.6vw,2.2rem);
+  letter-spacing:-.01em;color:#fff;white-space:nowrap}
+.logo-wm b{color:var(--flame)}
 
 /* ============================================================
    SERVIÇOS — esteira horizontal (marquee) com câmera lenta no hover
@@ -369,7 +393,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 @media (max-width:640px){
   :root{
     --gutter:20px;
-    --t-hero:clamp(2.9rem, 1.6rem + 9.5vw, 4.1rem);
+    --t-hero:clamp(2.4rem, 1.4rem + 7.2vw, 3.4rem);
     --t-h2:clamp(1.9rem, 1.3rem + 4vw, 2.6rem);
     --t-lead:1.05rem;
   }
@@ -379,7 +403,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
   .hero-inner{align-items:center}
   .hero-pill{font-size:.82rem;padding:.45rem .9rem}
   .hero h1{margin-top:1.2rem;line-height:1.02}
-  .hero-sub{margin:1.2rem auto 1.9rem;font-size:1.18rem;line-height:1.5}
+  .hero-sub{margin:1.2rem auto 1.9rem;font-size:1.02rem}
   .hero-actions{flex-direction:column;width:100%;gap:.8rem}
   .hero-actions .btn{width:100%;justify-content:center;padding:1.05rem 1.2rem}
 
@@ -389,11 +413,11 @@ a.textlink:hover .arrow{transform:translateX(4px)}
   .head-row h2 br{display:none}
   .lead{font-size:1rem}
 
-  /* STATS: 2 colunas enxutas */
+  /* STATS: 2 colunas, números grandes */
   .stats-grid{grid-template-columns:1fr 1fr}
-  .stat{padding:26px 20px}
-  .stat .num{font-size:clamp(2.2rem,7vw,3rem)}
-  .stat .lab{font-size:.9rem}
+  .stat{padding:30px 20px}
+  .stat .num{font-size:clamp(2.8rem,12vw,4rem)}
+  .stat .lab{font-size:.9rem;margin-top:.7rem}
 
   /* SERVIÇOS: card um pouco mais estreito, hint centralizado */
   .svc{width:78vw;min-height:0;padding:26px}
@@ -425,6 +449,9 @@ a.textlink:hover .arrow{transform:translateX(4px)}
   /* FOOTER */
   .foot-top{grid-template-columns:1fr;gap:1.8rem}
   .foot-bottom{flex-direction:column;gap:.5rem}
+
+  /* CLIENTES: logos menores */
+  .logo-item{height:44px}
 }
 
 /* telas bem pequenas */
@@ -470,7 +497,7 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="topo">
-  <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+  <canvas class="hero-canvas" id="shaderCanvas" aria-hidden="true"></canvas>
 
   <div class="hero-inner">
     <span class="hero-pill"><span class="spark">✦</span> 14 anos liderando times e marcas</span>
@@ -488,13 +515,48 @@ a.textlink:hover .arrow{transform:translateX(4px)}
 </section>
 
 <!-- ===================== STATS ===================== -->
-<!-- Marquito: ajuste os números pra realidade da TENKS -->
+<!-- Marquito: ajuste os números reais em data-to / prefixo / sufixo -->
 <section class="stats">
   <div class="stats-grid">
-    <div class="stat"><div class="num"><span class="flame">14</span></div><div class="lab">anos de mercado gerindo times e resultados</div></div>
-    <div class="stat"><div class="num">+120</div><div class="lab">projetos e campanhas entregues</div></div>
-    <div class="stat"><div class="num">+40</div><div class="lab">marcas que confiaram na gente</div></div>
-    <div class="stat"><div class="num">100%</div><div class="lab">foco em ideia ousada e resultado real</div></div>
+    <div class="stat">
+      <div class="num flame" data-to="14">0</div>
+      <div class="lab">anos de mercado gerindo times e resultados</div>
+    </div>
+    <div class="stat">
+      <div class="num" data-to="120" data-prefix="+">0</div>
+      <div class="lab">projetos e campanhas entregues</div>
+    </div>
+    <div class="stat">
+      <div class="num" data-to="40" data-prefix="+">0</div>
+      <div class="lab">marcas que confiaram na gente</div>
+    </div>
+    <div class="stat">
+      <div class="num" data-to="100" data-suffix="%">0</div>
+      <div class="lab">foco em ideia ousada e resultado real</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CLIENTES ===================== -->
+<section class="section clients" id="clientes">
+  <div class="wrap">
+    <p class="clients-title">Clientes que passaram pela <span class="flame">TENKS</span></p>
+  </div>
+
+  <!-- Marquito: troque cada .logo-item pelo SVG/PNG vetorizado real do cliente.
+       Ex.: <div class="logo-item"><img src="clientes/nomedocliente.svg" alt="Nome"></div>
+       Mantém a estrutura .logo-track > .logo-item que o carrossel cuida do resto. -->
+  <div class="logo-marquee" id="logoMarquee">
+    <div class="logo-track" id="logoTrack">
+      <div class="logo-item"><span class="logo-wm">NOVA<b>.</b></span></div>
+      <div class="logo-item"><span class="logo-wm">vértice</span></div>
+      <div class="logo-item"><span class="logo-wm">LUMEN</span></div>
+      <div class="logo-item"><span class="logo-wm">Órbita</span></div>
+      <div class="logo-item"><span class="logo-wm">PRISMA</span></div>
+      <div class="logo-item"><span class="logo-wm">ápice<b>+</b></span></div>
+      <div class="logo-item"><span class="logo-wm">MERIDIAN</span></div>
+      <div class="logo-item"><span class="logo-wm">Fluxo</span></div>
+    </div>
   </div>
 </section>
 
@@ -551,6 +613,9 @@ a.textlink:hover .arrow{transform:translateX(4px)}
     </div>
   </div>
 
+  <div class="wrap">
+    <p class="marquee-hint">↔ passe o mouse pra desacelerar</p>
+  </div>
 </section>
 
 <!-- ===================== SOBRE ===================== -->
@@ -713,6 +778,169 @@ a.textlink:hover .arrow{transform:translateX(4px)}
   "use strict";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ============================================================
+     SHADER WebGL da hero (nebulosa/fumaça animada por GPU)
+     ============================================================ */
+  (function(){
+    var canvas = document.getElementById("shaderCanvas");
+    var hero = document.getElementById("topo");
+    if(!canvas || !hero) return;
+    var gl = canvas.getContext("webgl2");
+    if(!gl){ canvas.style.display = "none"; return; } // usa o gradiente CSS de fallback
+
+    var dpr = Math.max(1, 0.5 * (window.devicePixelRatio || 1)); // meia-resolução p/ performance
+
+    var vertexSrc = "#version 300 es\nprecision highp float;\nin vec4 position;\nvoid main(){gl_Position=position;}";
+
+    var fragSrc = "#version 300 es\n\
+precision highp float;\n\
+out vec4 O;\n\
+uniform vec2 resolution;\n\
+uniform float time;\n\
+#define FC gl_FragCoord.xy\n\
+#define T time\n\
+#define R resolution\n\
+#define MN min(R.x,R.y)\n\
+float rnd(vec2 p){p=fract(p*vec2(12.9898,78.233));p+=dot(p,p+34.56);return fract(p.x*p.y);}\n\
+float noise(in vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);float a=rnd(i),b=rnd(i+vec2(1,0)),c=rnd(i+vec2(0,1)),d=rnd(i+1.);return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);}\n\
+float fbm(vec2 p){float t=.0,a=1.;mat2 m=mat2(1.,-.5,.2,1.2);for(int i=0;i<5;i++){t+=a*noise(p);p*=2.*m;a*=.5;}return t;}\n\
+float clouds(vec2 p){float d=1.,t=.0;for(float i=.0;i<3.;i++){float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);t=mix(t,d,a);d=a;p*=2./(i+1.);}return t;}\n\
+void main(void){\n\
+  vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);\n\
+  vec3 col=vec3(0);\n\
+  float bg=clouds(vec2(st.x+T*.5,-st.y));\n\
+  uv*=1.-.3*(sin(T*.2)*.5+.5);\n\
+  for(float i=1.;i<12.;i++){\n\
+    uv+=.1*cos(i*vec2(.1+.01*i,.8)+i*i+T*.5+.1*uv.x);\n\
+    vec2 p=uv;float d=length(p);\n\
+    col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);\n\
+    float b=noise(i+p+bg*1.731);\n\
+    col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));\n\
+    col=mix(col,vec3(bg*.32,bg*.14,bg*.05),d);\n\
+  }\n\
+  // paleta TENKS: puxa p/ laranja e escurece (foco no preto)\n\
+  col=pow(col,vec3(.85,1.05,1.35));\n\
+  col*=vec3(1.15,.72,.4)*1.15;\n\
+  O=vec4(col,1);\n\
+}";
+
+    function compile(type, src){
+      var s = gl.createShader(type);
+      gl.shaderSource(s, src); gl.compileShader(s);
+      if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){ console.error(gl.getShaderInfoLog(s)); }
+      return s;
+    }
+    var prog = gl.createProgram();
+    gl.attachShader(prog, compile(gl.VERTEX_SHADER, vertexSrc));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+    gl.linkProgram(prog);
+    if(!gl.getProgramParameter(prog, gl.LINK_STATUS)){ console.error(gl.getProgramInfoLog(prog)); canvas.style.display="none"; return; }
+    gl.useProgram(prog);
+
+    var buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,1,-1,-1,1,1,1,-1]), gl.STATIC_DRAW);
+    var pos = gl.getAttribLocation(prog, "position");
+    gl.enableVertexAttribArray(pos);
+    gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+
+    var uRes = gl.getUniformLocation(prog, "resolution");
+    var uTime = gl.getUniformLocation(prog, "time");
+
+    function resize(){
+      var w = hero.clientWidth, h = hero.clientHeight;
+      canvas.width = Math.max(1, Math.floor(w * dpr));
+      canvas.height = Math.max(1, Math.floor(h * dpr));
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    resize();
+    var rz; window.addEventListener("resize", function(){ clearTimeout(rz); rz = setTimeout(resize, 150); });
+
+    var raf, running = true, start = performance.now();
+    function frame(now){
+      if(!running) return;
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.uniform1f(uTime, (now - start) * 1e-3);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      raf = requestAnimationFrame(frame);
+    }
+    raf = requestAnimationFrame(frame);
+
+    // pausa quando a hero sai da tela (economiza bateria/GPU)
+    if("IntersectionObserver" in window){
+      new IntersectionObserver(function(en){
+        en.forEach(function(e){
+          if(e.isIntersecting && !running){ running = true; raf = requestAnimationFrame(frame); }
+          else if(!e.isIntersecting && running){ running = false; cancelAnimationFrame(raf); }
+        });
+      }, {threshold:0}).observe(hero);
+    }
+  })();
+
+  /* ============================================================
+     Contagem crescente dos números (quando entram na tela)
+     ============================================================ */
+  (function(){
+    var nums = Array.prototype.slice.call(document.querySelectorAll(".stat .num[data-to]"));
+    if(!nums.length) return;
+
+    function run(el){
+      var to = parseFloat(el.getAttribute("data-to")) || 0;
+      var pre = el.getAttribute("data-prefix") || "";
+      var suf = el.getAttribute("data-suffix") || "";
+      if(reduce){ el.textContent = pre + to + suf; return; }
+      var dur = 1600, t0 = performance.now();
+      function tick(now){
+        var p = Math.min(1, (now - t0) / dur);
+        var eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+        el.textContent = pre + Math.round(to * eased) + suf;
+        if(p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    if("IntersectionObserver" in window){
+      var io = new IntersectionObserver(function(en){
+        en.forEach(function(e){ if(e.isIntersecting){ run(e.target); io.unobserve(e.target); } });
+      }, {threshold:.5});
+      nums.forEach(function(n){ io.observe(n); });
+    } else {
+      nums.forEach(run);
+    }
+  })();
+
+  /* ============================================================
+     Carrossel de logos dos clientes (loop contínuo)
+     ============================================================ */
+  (function(){
+    var marquee = document.getElementById("logoMarquee");
+    var track = document.getElementById("logoTrack");
+    if(!marquee || !track || typeof track.animate !== "function") return;
+
+    Array.prototype.slice.call(track.children).forEach(function(node){
+      var c = node.cloneNode(true); c.setAttribute("aria-hidden","true"); track.appendChild(c);
+    });
+
+    var count = track.children.length / 2, anim = null, target = 1, raf, tries = 0;
+    function build(){
+      var w = track.children[count].getBoundingClientRect().left - track.children[0].getBoundingClientRect().left;
+      if((!w || w < 10) && tries++ < 60){ requestAnimationFrame(build); return; }
+      var rate = anim ? anim.playbackRate : 1;
+      if(anim) anim.cancel();
+      anim = track.animate(
+        [{transform:"translateX(0)"},{transform:"translateX(-"+w+"px)"}],
+        {duration:(w/45)*1000, iterations:Infinity, easing:"linear"}
+      );
+      anim.playbackRate = rate;
+    }
+    build();
+    function ramp(){ if(!anim) return; var c=anim.playbackRate,n=c+(target-c)*.12; if(Math.abs(n-target)<.01)n=target; anim.playbackRate=n; if(n!==target) raf=requestAnimationFrame(ramp); }
+    function setT(v){ target=v; cancelAnimationFrame(raf); ramp(); }
+    marquee.addEventListener("mouseenter", function(){ setT(.25); });
+    marquee.addEventListener("mouseleave", function(){ setT(1); });
+    var rt; window.addEventListener("resize", function(){ clearTimeout(rt); tries=0; rt=setTimeout(build,200); });
+  })();
+
   /* ---- nav condensa no scroll ---- */
   var nav = document.getElementById("nav");
   var onScroll = function(){ nav.classList.toggle("scrolled", window.scrollY > 24); };
@@ -831,165 +1059,6 @@ a.textlink:hover .arrow{transform:translateX(4px)}
     // recalcula ao redimensionar (largura do card muda)
     var rt;
     window.addEventListener("resize", function(){ clearTimeout(rt); tries = 0; rt = setTimeout(build, 200); });
-  })();
-
-  /* ============================================================
-     HERO SHADER — fundo animado em WebGL2 (nebulosa laranja/preta)
-     Adaptado do componente React "animated-shader-hero" pro padrão
-     vanilla JS + canvas usado no resto do site.
-     ============================================================ */
-  (function(){
-    var heroEl = document.getElementById("topo");
-    var canvas = document.getElementById("heroCanvas");
-    if(!heroEl || !canvas) return;
-
-    var gl = canvas.getContext("webgl2");
-    if(!gl){ heroEl.classList.add("no-webgl"); return; }
-
-    var vertexSrc = "#version 300 es\nprecision highp float;\nin vec4 position;\nvoid main(){gl_Position=position;}";
-
-    // Mesmo shader do componente original — a paleta quente (laranja
-    // sobre preto) já bate com a identidade da TENKS.
-    var fragmentSrc = "#version 300 es\n" +
-      "precision highp float;\n" +
-      "out vec4 O;\n" +
-      "uniform vec2 resolution;\n" +
-      "uniform float time;\n" +
-      "#define FC gl_FragCoord.xy\n" +
-      "#define T time\n" +
-      "#define R resolution\n" +
-      "#define MN min(R.x,R.y)\n" +
-      "float rnd(vec2 p){p=fract(p*vec2(12.9898,78.233));p+=dot(p,p+34.56);return fract(p.x*p.y);}\n" +
-      "float noise(in vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);float a=rnd(i),b=rnd(i+vec2(1,0)),c=rnd(i+vec2(0,1)),d=rnd(i+1.);return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);}\n" +
-      "float fbm(vec2 p){float t=.0,a=1.;mat2 m=mat2(1.,-.5,.2,1.2);for(int i=0;i<5;i++){t+=a*noise(p);p*=2.*m;a*=.5;}return t;}\n" +
-      "float clouds(vec2 p){float d=1.,t=.0;for(float i=.0;i<3.;i++){float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);t=mix(t,d,a);d=a;p*=2./(i+1.);}return t;}\n" +
-      "void main(void){\n" +
-      "  vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);\n" +
-      "  vec3 col=vec3(0);\n" +
-      "  float bg=clouds(vec2(st.x+T*.5,-st.y));\n" +
-      "  uv*=1.-.3*(sin(T*.2)*.5+.5);\n" +
-      "  for(float i=1.;i<12.;i++){\n" +
-      "    uv+=.1*cos(i*vec2(.1+.01*i,.8)+i*i+T*.5+.1*uv.x);\n" +
-      "    vec2 p=uv;\n" +
-      "    float d=length(p);\n" +
-      "    col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);\n" +
-      "    float b=noise(i+p+bg*1.731);\n" +
-      "    col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));\n" +
-      "    col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);\n" +
-      "  }\n" +
-      "  O=vec4(col,1);\n" +
-      "}";
-
-    var vertices = [-1, 1, -1, -1, 1, 1, 1, -1];
-    var dpr = Math.max(1, 0.5 * window.devicePixelRatio);
-    var program, vs, fs, buffer, uni = {};
-
-    function compile(shader, source){
-      gl.shaderSource(shader, source);
-      gl.compileShader(shader);
-      if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS)){
-        console.error("Erro ao compilar shader do hero:", gl.getShaderInfoLog(shader));
-      }
-    }
-
-    function setup(){
-      vs = gl.createShader(gl.VERTEX_SHADER);
-      fs = gl.createShader(gl.FRAGMENT_SHADER);
-      compile(vs, vertexSrc);
-      compile(fs, fragmentSrc);
-      program = gl.createProgram();
-      gl.attachShader(program, vs);
-      gl.attachShader(program, fs);
-      gl.linkProgram(program);
-      if(!gl.getProgramParameter(program, gl.LINK_STATUS)){
-        console.error("Erro ao linkar programa do hero:", gl.getProgramInfoLog(program));
-        heroEl.classList.add("no-webgl");
-        return false;
-      }
-      return true;
-    }
-
-    function init(){
-      buffer = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-      var position = gl.getAttribLocation(program, "position");
-      gl.enableVertexAttribArray(position);
-      gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-      uni.resolution = gl.getUniformLocation(program, "resolution");
-      uni.time = gl.getUniformLocation(program, "time");
-      uni.move = gl.getUniformLocation(program, "move");
-      uni.touch = gl.getUniformLocation(program, "touch");
-      uni.pointerCount = gl.getUniformLocation(program, "pointerCount");
-      uni.pointers = gl.getUniformLocation(program, "pointers");
-    }
-
-    function resize(){
-      var r = heroEl.getBoundingClientRect();
-      canvas.width = Math.max(1, Math.round(r.width * dpr));
-      canvas.height = Math.max(1, Math.round(r.height * dpr));
-      gl.viewport(0, 0, canvas.width, canvas.height);
-    }
-
-    // ponteiro/mouse dentro do hero — dá vida ao shader sem travar cliques
-    var pointers = new Map();
-    var lastFirst = [0, 0];
-    var moves = [0, 0];
-
-    function mapPoint(clientX, clientY){
-      var r = canvas.getBoundingClientRect();
-      return [(clientX - r.left) * dpr, canvas.height - (clientY - r.top) * dpr];
-    }
-    heroEl.addEventListener("pointermove", function(e){
-      var p = mapPoint(e.clientX, e.clientY);
-      pointers.set(e.pointerId, p);
-      lastFirst = p;
-      moves = [moves[0] + e.movementX, moves[1] + e.movementY];
-    }, {passive:true});
-    heroEl.addEventListener("pointerleave", function(e){ pointers.delete(e.pointerId); }, {passive:true});
-    heroEl.addEventListener("pointerdown", function(e){ pointers.set(e.pointerId, mapPoint(e.clientX, e.clientY)); }, {passive:true});
-    heroEl.addEventListener("pointerup", function(e){ pointers.delete(e.pointerId); }, {passive:true});
-
-    function render(now){
-      if(!program || gl.getProgramParameter(program, gl.DELETE_STATUS)) return;
-      gl.clearColor(0, 0, 0, 1);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.useProgram(program);
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-      gl.uniform2f(uni.resolution, canvas.width, canvas.height);
-      gl.uniform1f(uni.time, now * 1e-3);
-      gl.uniform2f(uni.move, moves[0], moves[1]);
-      gl.uniform2f(uni.touch, lastFirst[0], lastFirst[1]);
-      gl.uniform1i(uni.pointerCount, pointers.size);
-      var coords = pointers.size ? Array.from(pointers.values()).flat() : [0, 0];
-      gl.uniform2fv(uni.pointers, coords);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    }
-
-    if(!setup()) return;
-    init();
-    resize();
-
-    var raf;
-    function loop(now){
-      render(now);
-      raf = requestAnimationFrame(loop);
-    }
-
-    if(reduce){
-      render(0); // respeita "menos movimento": desenha 1 quadro estático
-    } else {
-      loop(0);
-    }
-
-    var rt2;
-    window.addEventListener("resize", function(){
-      clearTimeout(rt2);
-      rt2 = setTimeout(function(){
-        dpr = Math.max(1, 0.5 * window.devicePixelRatio);
-        resize();
-      }, 150);
-    });
   })();
 
   /* ---- ano no rodapé ---- */
