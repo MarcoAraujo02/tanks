@@ -5,72 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#0a0807" />
 <title>TENKS — Agência de Marketing e Performance</title>
-<meta name="description" content="TENKS é a agência de marketing que transforma ideias ousadas em resultados reais. 14 anos liderando times, marcas e campanhas. Serviços, cursos e prompts de IA." />
+<meta name="description" content="Você imagina, a gente faz acontecer. Marketing pra marcas que não querem passar despercebidas: estratégia, criação, tráfego, conteúdo, branding e tecnologia num lugar só." />
 <link rel="icon" href="logo.jpg" />
 
-<!-- Fontes: Archivo (grotesca pesada, cara Swiss/agência) + Caveat (assinatura à mão) -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
 
 <style>
-/* ============================================================
-   TENKS — tokens de marca · Preto #121212 · Laranja #e75533
-   ============================================================ */
 :root{
-  --ink:#121212;
-  --ink-2:#171716;
-  --ink-3:#1f1e1d;
-  --flame:#e75533;
-  --flame-hi:#ff7a54;
-  --flame-deep:#bd3a1f;
-  --paper:#f4f2ee;
-  --paper-2:#e8e4dc;
-  --white:#ffffff;
-  --muted:#a2a09b;
-  --ink-muted:#5b5852;
-  --line:rgba(255,255,255,.12);
-
-  --maxw:1220px;
-  --gutter:clamp(20px,5vw,64px);
-
+  --ink:#121212;--ink-2:#171716;--ink-3:#1f1e1d;
+  --flame:#e75533;--flame-hi:#ff7a54;--flame-deep:#bd3a1f;
+  --paper:#f4f2ee;--paper-2:#e8e4dc;--white:#ffffff;
+  --muted:#a2a09b;--ink-muted:#5b5852;--line:rgba(255,255,255,.12);
+  --maxw:1220px;--gutter:clamp(20px,5vw,64px);
   --t-hero:clamp(2.3rem, 1.2rem + 4.4vw, 5.2rem);
   --t-h2:clamp(2rem, 1rem + 3.6vw, 3.9rem);
-  --t-h3:clamp(1.3rem,.9rem + 1.4vw, 1.9rem);
-  --t-lead:clamp(1.05rem,.95rem + .5vw, 1.35rem);
-
+  --t-h3:clamp(1.3rem, .9rem + 1.4vw, 1.9rem);
+  --t-lead:clamp(1.05rem, .95rem + .5vw, 1.35rem);
   --ease:cubic-bezier(.2,.75,.2,1);
 }
-
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  margin:0;background:var(--ink);color:var(--white);
-  font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
-  font-weight:400;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;
-}
+body{margin:0;background:var(--ink);color:var(--white);font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:400;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--flame);color:var(--white)}
-
 .display{font-weight:900;font-stretch:125%;line-height:.92;letter-spacing:-.02em}
 .flame{color:var(--flame)}
-.script{font-family:"Caveat",cursive;font-weight:700}
-
 .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
 .section{padding-block:clamp(72px,10vw,140px)}
-
 .eyebrow{display:inline-flex;align-items:center;gap:.6em;font-size:.8rem;font-weight:600;letter-spacing:.02em;color:var(--flame)}
 .eyebrow::before{content:"";width:26px;height:2px;background:var(--flame)}
 .lead{font-size:var(--t-lead);color:var(--muted);max-width:56ch}
 
-/* ---------- botões ---------- */
-.btn{
-  --bg:var(--flame);--fg:#fff;position:relative;display:inline-flex;align-items:center;gap:.65em;
-  padding:1rem 1.7rem;border-radius:999px;background:var(--bg);color:var(--fg);
-  font-weight:700;font-size:1rem;letter-spacing:-.01em;border:1px solid transparent;cursor:pointer;
-  transition:transform .25s var(--ease), background .25s, box-shadow .25s, color .25s;will-change:transform;
-}
+.btn{--bg:var(--flame);--fg:#fff;position:relative;display:inline-flex;align-items:center;gap:.65em;padding:1rem 1.7rem;border-radius:999px;background:var(--bg);color:var(--fg);font-weight:700;font-size:1rem;letter-spacing:-.01em;border:1px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .25s,box-shadow .25s,color .25s;will-change:transform}
 .btn:hover{box-shadow:0 12px 34px -12px rgba(231,85,51,.75)}
 .btn .arrow{transition:transform .3s var(--ease)}
 .btn:hover .arrow{transform:translateX(4px)}
@@ -81,25 +50,14 @@ a{color:inherit;text-decoration:none}
 .btn.glow{background:linear-gradient(180deg,#ff8a3d,#e75533);box-shadow:0 14px 40px -12px rgba(231,85,51,.8)}
 .btn.lg{padding:1.15rem 2rem;font-size:1.08rem}
 .btn.sm{padding:.72rem 1.15rem;font-size:.92rem}
-
+a.textlink{color:var(--flame);font-weight:600;display:inline-flex;align-items:center;gap:.4em;font-size:.95rem}
+a.textlink .arrow{transition:transform .3s var(--ease)}
+a.textlink:hover .arrow{transform:translateX(4px)}
 :focus-visible{outline:3px solid var(--flame-hi);outline-offset:3px;border-radius:6px}
 
-/* ============================================================
-   NAV  (fundo mais escuro)
-   ============================================================ */
-.nav{
-  position:fixed;inset:0 0 auto 0;z-index:60;display:flex;align-items:center;justify-content:space-between;
-  padding:18px var(--gutter);
-  background:linear-gradient(180deg, rgba(5,4,3,.92) 0%, rgba(5,4,3,.55) 55%, transparent 100%);
-  transition:background .35s,backdrop-filter .35s,padding .35s,border-color .35s;
-  border-bottom:1px solid transparent;
-}
-.nav.scrolled{
-  background:rgba(8,7,6,.94);
-  backdrop-filter:blur(14px) saturate(140%);
-  border-bottom-color:var(--line);
-  padding-block:12px;
-}
+/* NAV */
+.nav{position:fixed;inset:0 0 auto 0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:18px var(--gutter);background:linear-gradient(180deg,rgba(5,4,3,.92) 0%,rgba(5,4,3,.55) 55%,transparent 100%);transition:background .35s,backdrop-filter .35s,padding .35s,border-color .35s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(8,7,6,.94);backdrop-filter:blur(14px) saturate(140%);border-bottom-color:var(--line);padding-block:12px}
 .brand{display:flex;align-items:center;gap:.7rem;font-weight:900;font-stretch:125%;letter-spacing:-.03em;font-size:1.35rem}
 .brand img{width:38px;height:38px;border-radius:10px;box-shadow:0 6px 20px -8px rgba(231,85,51,.7)}
 .nav-links{display:flex;align-items:center;gap:1.9rem}
@@ -113,95 +71,80 @@ a{color:inherit;text-decoration:none}
 .menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
 .menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-/* ============================================================
-   HERO — shader WebGL2 (preto e branco)
-   ============================================================ */
-.hero{
-  position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:120px var(--gutter) clamp(60px,9vh,120px);overflow:hidden;isolation:isolate;
-  background:#0a0807;
-}
+/* HERO */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px var(--gutter) clamp(60px,9vh,120px);overflow:hidden;isolation:isolate;background:#0a0807}
 .hero-canvas{position:absolute;inset:0;z-index:-3;width:100%;height:100%;display:block;touch-action:none;background:#0a0807}
-.hero.no-webgl{
-  background:
-    radial-gradient(42% 46% at 80% 16%, rgba(255,255,255,.16), transparent 60%),
-    radial-gradient(46% 52% at 16% 30%, rgba(255,255,255,.09), transparent 62%),
-    radial-gradient(50% 48% at 62% 88%, rgba(255,255,255,.11), transparent 60%),
-    #0a0807;
-}
+.hero.no-webgl{background:radial-gradient(42% 46% at 80% 16%,rgba(255,255,255,.16),transparent 60%),radial-gradient(46% 52% at 16% 30%,rgba(255,255,255,.09),transparent 62%),radial-gradient(50% 48% at 62% 88%,rgba(255,255,255,.11),transparent 60%),#0a0807}
 .hero.no-webgl .hero-canvas{display:none}
-.hero::after{
-  content:"";position:absolute;inset:0;z-index:-1;opacity:.4;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
-}
-.hero::before{
-  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(180deg, rgba(6,5,4,.9) 0%, rgba(6,5,4,.4) 16%, rgba(6,5,4,.18) 40%, rgba(6,5,4,.18) 66%, rgba(6,5,4,.75) 100%);
-}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.4;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E")}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(6,5,4,.9) 0%,rgba(6,5,4,.4) 16%,rgba(6,5,4,.18) 40%,rgba(6,5,4,.18) 66%,rgba(6,5,4,.75) 100%)}
 .hero-inner{position:relative;z-index:2;max-width:1000px;margin-inline:auto;width:100%;display:flex;flex-direction:column;align-items:center}
-.hero-pill{
-  display:inline-flex;align-items:center;gap:.55em;padding:.5rem 1.1rem;border-radius:999px;
-  border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.06);backdrop-filter:blur(6px);
-  font-size:.9rem;font-weight:500;color:#f2efe9;opacity:0;animation:fadeUp .7s .05s var(--ease) forwards;
-}
+.hero-pill{display:inline-flex;align-items:center;gap:.55em;padding:.5rem 1.1rem;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.06);backdrop-filter:blur(6px);font-size:.9rem;font-weight:500;color:#f2efe9;opacity:0;animation:fadeUp .7s .05s var(--ease) forwards}
 .hero-pill .spark{color:var(--flame-hi)}
 .hero h1{margin:1.4rem 0 0;font-size:var(--t-hero);font-weight:900;font-stretch:125%;line-height:.96;letter-spacing:-.02em;color:#f6f1ea}
-.hero h1 .line3{color:var(--flame)}
+.hero h1 .line2{color:var(--flame)}
 .hero h1 .row{display:block;overflow:hidden}
 .hero h1 .row > span{display:inline-block;transform:translateY(115%);animation:rise .9s var(--ease) forwards}
 .hero h1 .row:nth-child(1) > span{animation-delay:.18s}
-.hero h1 .row:nth-child(2) > span{animation-delay:.30s}
-.hero h1 .row:nth-child(3) > span{animation-delay:.42s}
+.hero h1 .row:nth-child(2) > span{animation-delay:.32s}
 @keyframes rise{to{transform:translateY(0)}}
-.hero-sub{max-width:56ch;margin:1.6rem auto 2.4rem;font-size:clamp(1.2rem,1rem + 1.1vw,1.65rem);line-height:1.45;color:#f0e8de;opacity:0;animation:fadeUp .8s .62s var(--ease) forwards}
-.hero-actions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;opacity:0;animation:fadeUp .8s .74s var(--ease) forwards}
+.hero-sub{max-width:58ch;margin:1.6rem auto 2.4rem;font-size:clamp(1.15rem, 1rem + 1vw, 1.5rem);line-height:1.5;color:#f0e8de;opacity:0;animation:fadeUp .8s .58s var(--ease) forwards}
+.hero-actions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;opacity:0;animation:fadeUp .8s .7s var(--ease) forwards}
+.hero-strip{margin-top:2.2rem;color:var(--muted);font-size:.9rem;letter-spacing:.01em;opacity:0;animation:fadeUp .8s .82s var(--ease) forwards}
+.hero-strip b{color:#e7ded4;font-weight:700}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
-/* ============================================================
-   STATS — números MAIORES e mais chamativos
-   ============================================================ */
+/* STATS */
 .stats{border-top:1px solid var(--line);background:var(--ink)}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
-.stat{background:var(--ink);padding:clamp(44px,5vw,72px) clamp(20px,3vw,40px);position:relative;overflow:hidden}
-.stat::before{content:"";position:absolute;left:0;top:0;width:44px;height:5px;background:var(--flame)}
-.stat .num{
-  font-size:clamp(1.9rem,1.4rem + 1vw,2.5rem);font-weight:900;font-stretch:100%;
-  line-height:.86;letter-spacing:-.03em;color:#fff;font-variant-numeric:tabular-nums;
-  text-shadow:0 8px 40px rgba(231,85,51,.25);
-}
-.stat .num.flame{color:var(--flame);text-shadow:0 8px 46px rgba(231,85,51,.5)}
-.stat .lab{margin-top:1.2rem;color:var(--muted);font-size:1.1rem;max-width:22ch}
+.stat{background:var(--ink);padding:clamp(40px,5vw,64px) clamp(20px,3vw,40px);position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;width:40px;height:4px;background:var(--flame)}
+.stat .num{font-size:clamp(1.9rem, 1.4rem + 1vw, 2.5rem);font-weight:900;font-stretch:100%;line-height:.9;letter-spacing:-.03em;color:#fff;font-variant-numeric:tabular-nums}
+.stat .num.flame{color:var(--flame)}
+.stat .lab{margin-top:1rem;color:var(--muted);font-size:1.02rem;max-width:22ch}
 
-/* ============================================================
-   CLIENTES — carrossel de logos
-   ============================================================ */
+/* CLIENTES */
 .clients{background:var(--ink);padding-block:clamp(56px,8vw,96px)}
-.clients-title{text-align:center;color:var(--muted);font-size:.95rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin:0 0 clamp(32px,4vw,52px)}
-.logo-marquee{position:relative;overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-          mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.clients-head{text-align:center;margin-bottom:clamp(32px,4vw,52px)}
+.clients-head .eyebrow{justify-content:center}
+.clients-head h2{font-size:var(--t-h2);font-weight:900;font-stretch:125%;letter-spacing:-.02em;margin:.7rem 0 .6rem}
+.clients-head p{color:var(--muted);margin:0 auto;max-width:50ch}
+.logo-marquee{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .logo-track{display:flex;align-items:center;gap:clamp(40px,6vw,88px);width:max-content;will-change:transform}
 .logo-item{flex:0 0 auto;display:flex;align-items:center;justify-content:center;height:60px;opacity:.5;filter:grayscale(1);transition:opacity .3s,filter .3s}
 .logo-item:hover{opacity:1;filter:none}
 .logo-item img{max-height:46px;width:auto;display:block}
-.logo-wm{font-weight:800;font-stretch:110%;font-size:clamp(1.5rem,1rem + 1.6vw,2.2rem);letter-spacing:-.01em;color:#fff;white-space:nowrap}
+.logo-wm{font-weight:800;font-stretch:110%;font-size:clamp(1.5rem, 1rem + 1.6vw, 2.2rem);letter-spacing:-.01em;color:#fff;white-space:nowrap}
 .logo-wm b{color:var(--flame)}
+.clients-foot{text-align:center;margin-top:clamp(38px,5vw,60px)}
+.clients-foot p{font-size:clamp(1.4rem,1rem + 1.4vw,2rem);font-weight:900;font-stretch:110%;color:#fff;margin:0 0 1.3rem;letter-spacing:-.02em}
 
-/* ============================================================
-   SERVIÇOS — esteira horizontal (marquee)
-   ============================================================ */
+/* PROBLEMAS */
+.problems{background:var(--ink)}
+.problems .head-row{margin-bottom:clamp(32px,4vw,52px)}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.prob{border:1px solid var(--line);border-radius:18px;background:var(--ink-2);padding:clamp(24px,3vw,34px);display:flex;flex-direction:column;transition:border-color .3s,transform .3s var(--ease)}
+.prob:hover{border-color:var(--flame);transform:translateY(-3px)}
+.prob h3{font-size:1.22rem;font-weight:800;color:#fff;margin:0 0 .85rem;line-height:1.3}
+.prob h3 .q{color:var(--flame)}
+.prob p{color:var(--muted);margin:0 0 1.5rem;font-size:.98rem;line-height:1.62}
+.prob a.textlink{margin-top:auto}
+
+/* PROCESSO */
+.process{background:var(--ink-2)}
+.timeline{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:clamp(44px,5vw,68px)}
+.timeline::before{content:"";position:absolute;left:27px;right:27px;top:27px;height:2px;background:var(--line)}
+.tl-step{position:relative}
+.tl-step .dot{width:54px;height:54px;border-radius:50%;background:var(--ink);border:2px solid var(--flame);color:var(--flame);display:grid;place-items:center;font-weight:900;font-size:1.2rem;position:relative;z-index:1;margin-bottom:1.3rem}
+.tl-step h4{margin:0 0 .5rem;font-size:1.02rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase}
+.tl-step p{margin:0;color:var(--muted);font-size:.92rem;line-height:1.55}
+
+/* SERVIÇOS */
 .head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:clamp(36px,5vw,64px)}
 .head-row h2{margin:.6rem 0 0;font-size:var(--t-h2)}
-.svc-marquee{position:relative;overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
-          mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);}
+.svc-marquee{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
 .svc-track{display:flex;gap:22px;width:max-content;will-change:transform;padding:32px var(--gutter) 60px}
-.svc{
-  flex:0 0 auto;width:clamp(260px,80vw,340px);min-height:300px;background:var(--ink-2);
-  border:1px solid var(--line);border-radius:22px;padding:clamp(26px,3vw,36px);
-  display:flex;flex-direction:column;position:relative;overflow:hidden;
-  transition:transform .4s var(--ease),border-color .4s,background .4s,box-shadow .4s;
-}
+.svc{flex:0 0 auto;width:clamp(260px,80vw,340px);min-height:300px;background:var(--ink-2);border:1px solid var(--line);border-radius:22px;padding:clamp(26px,3vw,36px);display:flex;flex-direction:column;position:relative;overflow:hidden;transition:transform .4s var(--ease),border-color .4s,background .4s,box-shadow .4s}
 .svc:hover{transform:translateY(-8px);border-color:var(--flame);background:var(--ink-3);box-shadow:0 26px 60px -30px rgba(231,85,51,.6)}
 .svc .idx{font-size:.85rem;color:var(--muted);font-weight:600;letter-spacing:.02em}
 .svc h3{font-size:var(--t-h3);font-weight:800;font-stretch:110%;letter-spacing:-.02em;margin:.9rem 0 .7rem}
@@ -213,24 +156,17 @@ a{color:inherit;text-decoration:none}
 .svc.feature:hover{background:linear-gradient(155deg,#a83318,var(--flame));box-shadow:0 26px 60px -26px rgba(231,85,51,.85)}
 .marquee-hint{margin-top:1.4rem;color:var(--muted);font-size:.85rem;display:flex;align-items:center;gap:.5rem}
 
-/* ============================================================
-   DIAGNÓSTICO
-   ============================================================ */
-.diag{
-  position:relative;overflow:hidden;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  background:radial-gradient(80% 130% at 50% 0%, rgba(231,85,51,.18), transparent 62%), var(--ink-2);
-}
+/* DIAGNÓSTICO */
+.diag{position:relative;overflow:hidden;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:radial-gradient(80% 130% at 50% 0%,rgba(231,85,51,.18),transparent 62%),var(--ink-2)}
 .diag .eyebrow{justify-content:center}
 .diag h2{font-size:var(--t-h2);font-weight:900;font-stretch:125%;letter-spacing:-.02em;text-transform:uppercase;margin:.9rem 0 .3rem}
-.diag .sub{font-family:"Caveat",cursive;font-size:clamp(1.9rem,1rem + 2.4vw,3rem);color:var(--flame);margin:0 0 1.4rem}
+.diag .sub{font-family:"Caveat",cursive;font-size:clamp(1.9rem, 1rem + 2.4vw, 3rem);color:var(--flame);margin:0 0 1.4rem}
 .diag p.lead{margin:0 auto 2rem;color:#cfc8c0;max-width:54ch;text-align:center}
 .diag .reassure{display:flex;gap:.6rem 1.6rem;justify-content:center;flex-wrap:wrap;margin-top:1.8rem;color:var(--muted);font-size:.92rem}
 .diag .reassure span{display:inline-flex;align-items:center;gap:.45rem}
 .diag .reassure span::before{content:"✓";color:var(--flame);font-weight:800}
 
-/* ============================================================
-   SOBRE (fundo claro)
-   ============================================================ */
+/* SOBRE */
 .about{background:var(--paper);color:var(--ink)}
 .about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,72px);align-items:center}
 .about h2{font-size:var(--t-h2);margin:.6rem 0 1.4rem;color:var(--ink)}
@@ -245,17 +181,13 @@ a{color:inherit;text-decoration:none}
 .mini-list li{list-style:none;display:flex;gap:.6rem;align-items:flex-start;color:var(--ink);font-weight:500}
 .mini-list li .ck{color:var(--flame);font-weight:900;flex:none}
 
-/* ============================================================
-   MANIFESTO
-   ============================================================ */
+/* MANIFESTO */
 .manifesto{background:var(--flame);color:#fff;text-align:left}
-.manifesto .big{font-size:clamp(2.2rem,1rem + 5vw,5.4rem);font-weight:900;font-stretch:125%;line-height:.98;letter-spacing:-.03em;max-width:20ch}
+.manifesto .big{font-size:clamp(2.2rem, 1rem + 5vw, 5.4rem);font-weight:900;font-stretch:125%;line-height:.98;letter-spacing:-.03em;max-width:20ch}
 .manifesto .big .out{color:#2a0f08}
 .manifesto .sub{margin-top:1.6rem;font-size:var(--t-lead);color:rgba(255,255,255,.9);max-width:50ch}
 
-/* ============================================================
-   CURSOS & PROMPTS
-   ============================================================ */
+/* CURSOS & PROMPTS */
 .edu{background:var(--ink-2)}
 .sub-block{margin-top:clamp(56px,7vw,90px)}
 .sub-block:first-child{margin-top:0}
@@ -280,9 +212,7 @@ a{color:inherit;text-decoration:none}
 .prompt .meta h4{margin:.4rem 0 1rem;font-size:1.22rem;font-weight:800;letter-spacing:-.01em}
 .prompt .meta .btn{padding:.62rem 1rem;font-size:.88rem}
 
-/* ============================================================
-   FAQ
-   ============================================================ */
+/* FAQ */
 .faq{background:var(--ink)}
 .faq-head{text-align:center;margin-bottom:clamp(34px,4vw,56px)}
 .faq-head .eyebrow{justify-content:center}
@@ -298,18 +228,13 @@ a{color:inherit;text-decoration:none}
 .faq-item .ans{padding:0 1.4rem 1.35rem;color:var(--muted);font-size:1rem;line-height:1.65;max-width:70ch}
 .faq-cta{text-align:center;margin-top:clamp(34px,4vw,52px)}
 
-/* ============================================================
-   CTA FINAL
-   ============================================================ */
-.cta{position:relative;overflow:hidden;text-align:center;
-  background:radial-gradient(90% 120% at 50% 0%,rgba(231,85,51,.4),transparent 60%),linear-gradient(160deg,#141311,#2a1710 60%,#5c2414)}
-.cta h2{font-size:clamp(2.2rem,1rem + 5vw,5rem);font-weight:900;font-stretch:125%;line-height:.98;letter-spacing:-.03em;margin:0 auto;max-width:16ch}
+/* CTA */
+.cta{position:relative;overflow:hidden;text-align:center;background:radial-gradient(90% 120% at 50% 0%,rgba(231,85,51,.4),transparent 60%),linear-gradient(160deg,#141311,#2a1710 60%,#5c2414)}
+.cta h2{font-size:clamp(2.2rem, 1rem + 5vw, 5rem);font-weight:900;font-stretch:125%;line-height:.98;letter-spacing:-.03em;margin:0 auto;max-width:16ch}
 .cta p{margin:1.4rem auto 2.4rem;max-width:48ch;color:#eadfd8;font-size:var(--t-lead)}
 .cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
+/* FOOTER */
 .foot{background:var(--ink);border-top:1px solid var(--line);padding-block:clamp(56px,7vw,88px) 32px}
 .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.4rem}
 .foot .brand{margin-bottom:1.1rem}
@@ -319,9 +244,7 @@ a{color:inherit;text-decoration:none}
 .foot-col a:hover{color:var(--flame)}
 .foot-bottom{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:var(--muted);font-size:.86rem}
 
-/* ============================================================
-   RESPONSIVO
-   ============================================================ */
+/* RESPONSIVO */
 @media (max-width:1024px){
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .about-grid{grid-template-columns:1fr;gap:40px}
@@ -333,70 +256,55 @@ a{color:inherit;text-decoration:none}
   .nav-links,.nav-cta .btn{display:none}
   .menu-btn{display:block}
   .nav.open{background:rgba(8,7,6,.98)}
-  .nav.open .nav-links{
-    display:flex;flex-direction:column;gap:1.4rem;align-items:flex-start;
-    position:fixed;inset:60px 0 auto 0;background:rgba(8,7,6,.98);
-    backdrop-filter:blur(14px);padding:2rem var(--gutter) 2.4rem;border-bottom:1px solid var(--line);
-  }
+  .nav.open .nav-links{display:flex;flex-direction:column;gap:1.4rem;align-items:flex-start;position:fixed;inset:60px 0 auto 0;background:rgba(8,7,6,.98);backdrop-filter:blur(14px);padding:2rem var(--gutter) 2.4rem;border-bottom:1px solid var(--line)}
   .nav.open .nav-links a{font-size:1.5rem;font-weight:700}
   .prompt-grid{grid-template-columns:1fr}
   .foot-top{grid-template-columns:1fr 1fr;gap:2rem}
+  .timeline{grid-template-columns:1fr;gap:26px}
+  .timeline::before{display:none}
+  .tl-step{display:grid;grid-template-columns:auto 1fr;gap:1.1rem;align-items:start}
+  .tl-step .dot{margin:0}
 }
-
-/* ---------- MOBILE ---------- */
 @media (max-width:640px){
-  :root{
-    --gutter:20px;
-    --t-hero:clamp(2.9rem, 1.6rem + 9.5vw, 4.1rem);
-    --t-h2:clamp(1.9rem, 1.3rem + 4vw, 2.6rem);
-    --t-lead:1.05rem;
-  }
+  :root{--gutter:20px;--t-hero:clamp(2.6rem, 1.4rem + 8vw, 3.6rem);--t-h2:clamp(1.9rem, 1.3rem + 4vw, 2.6rem);--t-lead:1.05rem}
   .hero{min-height:auto;padding:120px var(--gutter) 72px;justify-content:flex-start}
   .hero-inner{align-items:center}
   .hero-pill{font-size:.82rem;padding:.45rem .9rem}
-  .hero h1{margin-top:1.2rem;line-height:1.02}
-  .hero-sub{margin:1.2rem auto 1.9rem;font-size:1.18rem;line-height:1.5}
+  .hero h1{margin-top:1.2rem;line-height:1.04}
+  .hero-sub{margin:1.2rem auto 1.9rem;font-size:1.12rem;line-height:1.5}
   .hero-actions{flex-direction:column;width:100%;gap:.8rem}
   .hero-actions .btn{width:100%;justify-content:center;padding:1.05rem 1.2rem}
-
+  .hero-strip{font-size:.82rem}
   .section{padding-block:clamp(56px,13vw,76px)}
   .head-row{margin-bottom:32px}
   .head-row h2 br{display:none}
   .lead{font-size:1rem}
-
   .stats-grid{grid-template-columns:1fr 1fr}
-  .stat{padding:32px 18px}
+  .stat{padding:30px 18px}
   .stat .num{font-size:clamp(1.9rem,7vw,2.4rem)}
-  .stat .lab{font-size:.92rem;margin-top:.8rem}
-  .stat::before{width:34px;height:4px}
-
+  .stat .lab{font-size:.9rem;margin-top:.7rem}
+  .stat::before{width:32px;height:4px}
+  .prob-grid{grid-template-columns:1fr}
   .svc{width:78vw;min-height:0;padding:26px}
   .svc h3{margin:.7rem 0 .6rem}
   .svc .tag{padding-top:1.1rem}
   .marquee-hint{justify-content:center;text-align:center}
-
   .diag h2 br{display:none}
   .diag .reassure{flex-direction:column;gap:.5rem;align-items:center}
-
   .about h2 br{display:none}
   .about p{font-size:1.05rem}
   .mini-list{grid-template-columns:1fr}
   .about-badge{left:auto;right:14px;bottom:-14px;padding:14px 18px}
   .about .btn{width:100%;justify-content:center}
-
   .manifesto .big br{display:none}
   .manifesto .big{font-size:clamp(2rem,9vw,3rem)}
-
   .course{flex-direction:column;align-items:flex-start;gap:1rem}
   .course .btn{width:100%;justify-content:center}
   .block-title{margin-bottom:1.4rem}
-
   .faq-item summary{font-size:1rem}
-
   .cta h2 br{display:none}
   .cta-actions{flex-direction:column;width:100%}
   .cta-actions .btn{width:100%;justify-content:center}
-
   .foot-top{grid-template-columns:1fr;gap:1.8rem}
   .foot-bottom{flex-direction:column;gap:.5rem}
   .logo-item{height:44px}
@@ -405,10 +313,9 @@ a{color:inherit;text-decoration:none}
 
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .reveal.in{opacity:1;transform:none}
-
 @media (prefers-reduced-motion:reduce){
   .hero h1 .row > span{transform:none;animation:none}
-  .hero-pill,.hero-sub,.hero-actions{opacity:1;animation:none}
+  .hero-pill,.hero-sub,.hero-actions,.hero-strip{opacity:1;animation:none}
   .reveal{opacity:1;transform:none;transition:none}
   html{scroll-behavior:auto}
 }
@@ -416,7 +323,7 @@ a{color:inherit;text-decoration:none}
 </head>
 <body>
 
-<!-- ===================== NAV ===================== -->
+<!-- NAV -->
 <header class="nav" id="nav">
   <a class="brand" href="#topo" aria-label="TENKS — início">
     <img src="logo.jpg" alt="Logo TENKS" width="38" height="38" fetchpriority="high" />
@@ -424,67 +331,56 @@ a{color:inherit;text-decoration:none}
   </a>
   <nav class="nav-links" id="navLinks" aria-label="Navegação principal">
     <a href="#servicos">Serviços</a>
+    <a href="#processo">Processo</a>
     <a href="#sobre">Sobre</a>
     <a href="#educacao">Cursos &amp; Prompts</a>
     <a href="#faq">FAQ</a>
-    <a href="#contato">Contato</a>
   </nav>
   <div class="nav-cta">
-    <a href="#contato" class="btn sm">Começar projeto <span class="arrow">→</span></a>
-    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
-      <span></span><span></span><span></span>
-    </button>
+    <a href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener" class="btn sm">Fale com o time <span class="arrow">→</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<!-- ===================== HERO ===================== -->
+<!-- HERO (Dobra 1) -->
 <section class="hero" id="topo">
   <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
   <div class="hero-inner">
-    <span class="hero-pill"><span class="spark">✦</span> 14 anos liderando times e marcas</span>
+    <span class="hero-pill"><span class="spark">✦</span> 14+ anos de experiência</span>
     <h1>
-      <span class="row"><span>A gente não</span></span>
-      <span class="row"><span>segue a cultura.</span></span>
-      <span class="row"><span class="line3">A gente constrói.</span></span>
+      <span class="row"><span>Você imagina.</span></span>
+      <span class="row"><span class="line2">A gente faz acontecer.</span></span>
     </h1>
-    <p class="hero-sub">Estratégia, criação e crescimento pra marcas que querem ser lembradas — campanhas que conectam de verdade.</p>
+    <p class="hero-sub">Marketing pra marcas que não querem passar despercebidas. Estratégia, criação, tráfego, conteúdo, branding e tecnologia num lugar só — a gente transforma ideia em marca que chama atenção e gera negócio.</p>
     <div class="hero-actions">
-      <a href="#servicos" class="btn glow" data-magnetic>Conhecer serviços <span class="arrow">→</span></a>
-      <a href="#educacao" class="btn ghost" data-magnetic>Cursos &amp; Prompts</a>
+      <a href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener" class="btn glow" data-magnetic>Fale com nosso time <span class="arrow">→</span></a>
+      <a href="#servicos" class="btn ghost" data-magnetic>Veja o que a TENKS faz <span class="arrow">↓</span></a>
     </div>
+    <p class="hero-strip"><b>14+ anos</b> de experiência &nbsp;•&nbsp; Estratégia + Criatividade + Performance &nbsp;•&nbsp; Projetos ponta a ponta</p>
   </div>
 </section>
 
-<!-- ===================== STATS ===================== -->
+<!-- STATS -->
 <!-- Marquito: ajuste os números reais em data-to / prefixo / sufixo -->
 <section class="stats">
   <div class="stats-grid">
-    <div class="stat">
-      <div class="num flame" data-to="14" data-suffix="+">0</div>
-      <div class="lab">anos no mercado gerindo times e resultados</div>
-    </div>
-    <div class="stat">
-      <div class="num" data-to="120" data-prefix="+">0</div>
-      <div class="lab">projetos e campanhas entregues</div>
-    </div>
-    <div class="stat">
-      <div class="num" data-to="40" data-prefix="+">0</div>
-      <div class="lab">marcas que confiaram na gente</div>
-    </div>
-    <div class="stat">
-      <div class="num" data-to="100" data-suffix="%">0</div>
-      <div class="lab">foco em ideia ousada e resultado real</div>
-    </div>
+    <div class="stat"><div class="num flame" data-to="14" data-suffix="+">0</div><div class="lab">anos no mercado gerindo times e resultados</div></div>
+    <div class="stat"><div class="num" data-to="120" data-prefix="+">0</div><div class="lab">projetos e campanhas entregues</div></div>
+    <div class="stat"><div class="num" data-to="40" data-prefix="+">0</div><div class="lab">marcas que confiaram na gente</div></div>
+    <div class="stat"><div class="num" data-to="100" data-suffix="%">0</div><div class="lab">foco em ideia ousada e resultado real</div></div>
   </div>
 </section>
 
-<!-- ===================== CLIENTES ===================== -->
+<!-- CLIENTES (Dobra 2) -->
 <section class="section clients" id="clientes">
   <div class="wrap">
-    <p class="clients-title">Marcas que passaram pela <span class="flame">TENKS</span></p>
+    <div class="clients-head reveal">
+      <span class="eyebrow">Clientes</span>
+      <h2>Marcas que passaram por aqui.</h2>
+      <p>De negócios que estavam começando a empresas que precisavam dar o próximo passo.</p>
+    </div>
   </div>
-  <!-- Marquito: troque cada .logo-item pelo SVG/PNG vetorizado real do cliente.
-       Ex.: <div class="logo-item"><img src="clientes/nome.svg" alt="Nome"></div> -->
+  <!-- Marquito: troque cada .logo-item pelo SVG/PNG real do cliente -->
   <div class="logo-marquee" id="logoMarquee">
     <div class="logo-track" id="logoTrack">
       <div class="logo-item"><span class="logo-wm">NOVA<b>.</b></span></div>
@@ -497,9 +393,82 @@ a{color:inherit;text-decoration:none}
       <div class="logo-item"><span class="logo-wm">Fluxo</span></div>
     </div>
   </div>
+  <div class="wrap">
+    <div class="clients-foot reveal">
+      <p>A sua pode ser a próxima.</p>
+      <a href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener" class="btn glow" data-magnetic>Quero um orçamento <span class="arrow">→</span></a>
+    </div>
+  </div>
 </section>
 
-<!-- ===================== SERVIÇOS ===================== -->
+<!-- PROBLEMAS (Dobra 3) -->
+<section class="section problems" id="problemas">
+  <div class="wrap">
+    <div class="head-row reveal">
+      <div>
+        <span class="eyebrow">Talvez seja o seu caso</span>
+        <h2 class="display">Você provavelmente está<br>passando por um destes.</h2>
+      </div>
+      <p class="lead">E a gente consegue resolver mais deles do que você imagina. Veja se reconhece o seu:</p>
+    </div>
+
+    <div class="prob-grid reveal">
+      <article class="prob">
+        <h3><span class="q">“</span>Invisto em tráfego, mas não tenho retorno.<span class="q">”</span></h3>
+        <p>Colocar dinheiro em anúncio não é estratégia. Se o tráfego não traz oportunidade, tem algo errado entre campanha, oferta, criativo ou estratégia. A gente cuida dessa engrenagem pra transformar investimento em oportunidade real.</p>
+        <a class="textlink" href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener">Quero meu tráfego dando retorno <span class="arrow">→</span></a>
+      </article>
+      <article class="prob">
+        <h3><span class="q">“</span>Não consigo clientes pela internet.<span class="q">”</span></h3>
+        <p>Seu cliente está online. A questão é: por que ele escolheria você? A gente combina posicionamento, conteúdo, tráfego e estratégia pra sua empresa ser encontrada, lembrada e escolhida.</p>
+        <a class="textlink" href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener">Quero vender pela internet <span class="arrow">→</span></a>
+      </article>
+      <article class="prob">
+        <h3><span class="q">“</span>Não curto minha identidade visual.<span class="q">”</span></h3>
+        <p>Se a empresa cresceu mas a marca ficou pra trás, talvez seja hora de mudar. A gente transforma o que a sua empresa é hoje numa identidade que comunica o valor que ela merece ter.</p>
+        <a class="textlink" href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener">Quero outra cara pra minha marca <span class="arrow">→</span></a>
+      </article>
+      <article class="prob">
+        <h3><span class="q">“</span>Quero criar ou modernizar meu site.<span class="q">”</span></h3>
+        <p>Seu site pode ser muito mais que cartão de visitas. A gente cria experiências digitais pensadas pra apresentar a marca, passar credibilidade e transformar visitante em oportunidade.</p>
+        <a class="textlink" href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener">Quero um site que trabalha por mim <span class="arrow">→</span></a>
+      </article>
+      <article class="prob">
+        <h3><span class="q">“</span>Não tenho tempo pras redes sociais.<span class="q">”</span></h3>
+        <p>E você provavelmente nem deveria gastar seu tempo tentando descobrir o que postar amanhã. A gente assume estratégia, criação e gestão das redes pra você voltar a cuidar do que importa: o negócio.</p>
+        <a class="textlink" href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener">Quero um social media <span class="arrow">→</span></a>
+      </article>
+      <article class="prob">
+        <h3><span class="q">“</span>Faço marketing, mas não sei se é o certo.<span class="q">”</span></h3>
+        <p>Posta, anuncia, testa uma coisa aqui e outra ali… e no fim do mês segue sem saber se avançou. A gente analisa o cenário, acha os gargalos e define o que fazer, o que parar e onde focar. Às vezes não falta marketing — falta direção.</p>
+        <a class="textlink" href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener">Quero uma direção pro meu marketing <span class="arrow">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO (Dobra 4) -->
+<section class="section process" id="processo">
+  <div class="wrap">
+    <div class="head-row reveal">
+      <div>
+        <span class="eyebrow">Como a TENKS funciona</span>
+        <h2 class="display">Do problema<br>ao resultado.</h2>
+      </div>
+      <p class="lead">Não existe mágica. Existe processo. Cada etapa tem um porquê — e leva a marca de onde ela está pra onde ela quer chegar.</p>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="tl-step"><div class="dot">01</div><div class="tl-body"><h4>Entender</h4><p>Antes de criar qualquer coisa, entendemos seu negócio, mercado, público e o que está travando o crescimento.</p></div></div>
+      <div class="tl-step"><div class="dot">02</div><div class="tl-body"><h4>Estrategizar</h4><p>Definimos posicionamento, prioridades, canais, campanhas e o que realmente merece atenção.</p></div></div>
+      <div class="tl-step"><div class="dot">03</div><div class="tl-body"><h4>Criar</h4><p>Viramos estratégia em ideias, campanhas, conteúdo, marca e anúncios que fazem prestar atenção.</p></div></div>
+      <div class="tl-step"><div class="dot">04</div><div class="tl-body"><h4>Executar</h4><p>Colocamos tudo pra rodar — sem depender de uma apresentação bonita que nunca sai do PowerPoint.</p></div></div>
+      <div class="tl-step"><div class="dot">05</div><div class="tl-body"><h4>Otimizar</h4><p>Medimos, aprendemos, ajustamos e buscamos oportunidades melhores. Marketing bom não acaba quando a campanha vai ao ar.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS (Dobra 5) -->
 <section class="section" id="servicos">
   <div class="wrap">
     <div class="head-row reveal">
@@ -513,49 +482,18 @@ a{color:inherit;text-decoration:none}
 
   <div class="svc-marquee reveal" id="svcMarquee">
     <div class="svc-track" id="svcTrack">
-      <article class="svc">
-        <span class="idx">01</span>
-        <h3>Gestão de Tráfego</h3>
-        <p>Campanhas em Meta e Google que trazem cliente qualificado e ROI que dá pra medir.</p>
-        <span class="tag">Mídia paga</span>
-      </article>
-      <article class="svc">
-        <span class="idx">02</span>
-        <h3>Social Media</h3>
-        <p>Gestão de redes e criativos que param o scroll e constroem autoridade todo dia.</p>
-        <span class="tag">Conteúdo</span>
-      </article>
-      <article class="svc">
-        <span class="idx">03</span>
-        <h3>Branding &amp; Identidade</h3>
-        <p>Posicionamento, verbal e visual: uma marca com cara própria e difícil de esquecer.</p>
-        <span class="tag">Marca</span>
-      </article>
-      <article class="svc feature">
-        <span class="idx">04</span>
-        <h3>Sites &amp; Landing Pages</h3>
-        <p>Páginas que impressionam de cara e convertem. Bateu o olho, já sabe que é feito pra vender.</p>
-        <span class="tag">Web</span>
-      </article>
-      <article class="svc">
-        <span class="idx">05</span>
-        <h3>Estratégia &amp; Consultoria</h3>
-        <p>Plano de crescimento guiado por dados — pra parar de apostar e começar a escalar.</p>
-        <span class="tag">Growth</span>
-      </article>
-      <article class="svc">
-        <span class="idx">06</span>
-        <h3>Gestão de Times</h3>
-        <p>Estrutura, processo e liderança pra montar (ou destravar) um time de alta performance.</p>
-        <span class="tag">Operação</span>
-      </article>
+      <article class="svc"><span class="idx">01</span><h3>Gestão de Tráfego</h3><p>Campanhas em Meta e Google que trazem cliente qualificado e ROI que dá pra medir.</p><span class="tag">Mídia paga</span></article>
+      <article class="svc"><span class="idx">02</span><h3>Social Media</h3><p>Gestão de redes e criativos que param o scroll e constroem autoridade todo dia.</p><span class="tag">Conteúdo</span></article>
+      <article class="svc"><span class="idx">03</span><h3>Branding &amp; Identidade</h3><p>Posicionamento, verbal e visual: uma marca com cara própria e difícil de esquecer.</p><span class="tag">Marca</span></article>
+      <article class="svc feature"><span class="idx">04</span><h3>Sites &amp; Landing Pages</h3><p>Páginas que impressionam de cara e convertem. Bateu o olho, já sabe que é feito pra vender.</p><span class="tag">Web</span></article>
+      <article class="svc"><span class="idx">05</span><h3>Estratégia &amp; Consultoria</h3><p>Plano de crescimento guiado por dados — pra parar de apostar e começar a escalar.</p><span class="tag">Growth</span></article>
+      <article class="svc"><span class="idx">06</span><h3>Gestão de Times</h3><p>Estrutura, processo e liderança pra montar (ou destravar) um time de alta performance.</p><span class="tag">Operação</span></article>
     </div>
   </div>
-
-
+  <div class="wrap"><p class="marquee-hint">↔ passe o mouse pra desacelerar</p></div>
 </section>
 
-<!-- ===================== DIAGNÓSTICO ===================== -->
+<!-- DIAGNÓSTICO (Dobra 6) -->
 <section class="section diag" id="diagnostico">
   <div class="wrap reveal">
     <span class="eyebrow">Diagnóstico gratuito</span>
@@ -563,44 +501,37 @@ a{color:inherit;text-decoration:none}
     <p class="sub">A gente descobre com você.</p>
     <p class="lead">Responda algumas perguntas sobre sua empresa e descubra quais áreas do seu marketing provavelmente estão travando o seu crescimento. Leva menos de 2 minutos.</p>
     <a href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener" class="btn glow lg" data-magnetic>Fazer meu diagnóstico gratuito <span class="arrow">→</span></a>
-    <div class="reassure">
-      <span>Sem apresentação de 40 slides</span>
-      <span>Sem enrolação</span>
-      <span>Sem compromisso</span>
-    </div>
+    <div class="reassure"><span>Sem apresentação de 40 slides</span><span>Sem enrolação</span><span>Sem compromisso</span></div>
   </div>
 </section>
 
-<!-- ===================== SOBRE ===================== -->
+<!-- SOBRE (Dobra 7) -->
 <section class="section about" id="sobre">
   <div class="wrap">
     <div class="about-grid">
       <div class="reveal">
         <span class="eyebrow">Quem está por trás</span>
         <h2 class="display">A TENKS não nasceu<br>pra ser igual às outras.</h2>
-        <p>São mais de 14 anos vivendo marketing por dentro: liderando times, construindo marcas, criando campanhas, testando, errando, acertando e aprendendo o que faz uma estratégia sair do papel.</p>
-        <p>A gente não vende fórmula pronta. Junta pessoas, estratégia, criatividade e tecnologia pra construir solução que faz sentido pro seu negócio.</p>
+        <p>E talvez seja exatamente por isso que você chegou até aqui. São mais de 14 anos vivendo marketing por dentro: liderando times, construindo marcas, criando campanhas, testando, errando, acertando e aprendendo o que faz uma estratégia sair do papel.</p>
+        <p>A gente não vende fórmula pronta. Junta pessoas, estratégia, criatividade e tecnologia pra construir solução que faz sentido pro seu negócio. Marketing bom não precisa escolher entre ser criativo e dar resultado — pode fazer os dois.</p>
         <ul class="mini-list">
           <li><span class="ck">→</span> Ideias ousadas</li>
           <li><span class="ck">→</span> Execução de verdade</li>
           <li><span class="ck">→</span> Resultado que dá pra enxergar</li>
           <li><span class="ck">→</span> 14+ anos na prática</li>
         </ul>
-        <a href="#contato" class="btn dark" data-magnetic>Conhecer a TENKS <span class="arrow">→</span></a>
+        <a href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener" class="btn dark" data-magnetic>Conhecer a TENKS <span class="arrow">→</span></a>
         <div class="sign">— fundador &amp; head de estratégia</div>
       </div>
-
       <div class="about-media reveal">
-        <img src="quem.PNG" alt="Fundador da TENKS" width="900" height="1600" loading="lazy" decoding="async" />
-        <div class="about-badge">
-          <b>14+</b><span>anos vivendo<br>marketing</span>
-        </div>
+        <img src="quem.png" alt="Fundador da TENKS" width="900" height="1600" loading="lazy" decoding="async" />
+        <div class="about-badge"><b>14+</b><span>anos vivendo<br>marketing</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== MANIFESTO ===================== -->
+<!-- MANIFESTO -->
 <section class="section manifesto">
   <div class="wrap reveal">
     <p class="big display">Ideias ousadas.<br><span class="out">Resultados reais.</span></p>
@@ -608,7 +539,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<!-- ===================== CURSOS & PROMPTS ===================== -->
+<!-- CURSOS & PROMPTS (Dobra 8) -->
 <section class="section edu" id="educacao">
   <div class="wrap">
     <div class="head-row reveal">
@@ -619,70 +550,35 @@ a{color:inherit;text-decoration:none}
       <p class="lead">A inteligência artificial mudou a forma como a gente cria — e a TENKS tá dentro dessa mudança. Parte do que usamos todo dia virou curso, método e ferramenta pra você produzir mais e criar melhor.</p>
     </div>
 
-    <!-- CURSOS -->
     <div class="sub-block reveal">
-      <div class="block-title">
-        <h3>Cursos</h3>
-        <span class="cnt">marketing, gestão e estratégia direto de quem vive a prática</span>
-      </div>
+      <div class="block-title"><h3>Cursos</h3><span class="cnt">marketing, gestão e estratégia direto de quem vive a prática</span></div>
       <div class="course-grid">
-        <!-- Marquito: troque os href="#" pelos links reais da Hubla -->
-        <a class="course" href="#" target="_blank" rel="noopener">
-          <div class="ct">
-            <span class="hubla">▸ HUBLA</span>
-            <h4>Marketing na Prática</h4>
-            <p>Da estratégia à execução: o método que roda dentro da agência.</p>
-          </div>
-          <span class="btn sm">Acessar <span class="arrow">→</span></span>
-        </a>
-        <a class="course" href="#" target="_blank" rel="noopener">
-          <div class="ct">
-            <span class="hubla">▸ HUBLA</span>
-            <h4>Gestão de Times de Alta Performance</h4>
-            <p>Como montar, liderar e escalar um time de marketing que entrega.</p>
-          </div>
-          <span class="btn sm">Acessar <span class="arrow">→</span></span>
-        </a>
+        <a class="course" href="#" target="_blank" rel="noopener"><div class="ct"><span class="hubla">▸ HUBLA</span><h4>Marketing na Prática</h4><p>Da estratégia à execução: o método que roda dentro da agência.</p></div><span class="btn sm">Acessar <span class="arrow">→</span></span></a>
+        <a class="course" href="#" target="_blank" rel="noopener"><div class="ct"><span class="hubla">▸ HUBLA</span><h4>Gestão de Times de Alta Performance</h4><p>Como montar, liderar e escalar um time de marketing que entrega.</p></div><span class="btn sm">Acessar <span class="arrow">→</span></span></a>
       </div>
     </div>
 
-    <!-- PROMPTS -->
     <div class="sub-block reveal">
-      <div class="block-title">
-        <h3>Packs de Prompts</h3>
-        <span class="cnt">pra acelerar criação de conteúdo e produção visual com IA</span>
-      </div>
+      <div class="block-title"><h3>Packs de Prompts</h3><span class="cnt">pra acelerar criação de conteúdo e produção visual com IA</span></div>
       <div class="prompt-grid">
         <article class="prompt" data-tilt>
           <div class="prompt-img"><img src="prompt1.jpeg" alt="Pack de prompts para criadores de conteúdo" loading="lazy" decoding="async" /></div>
-          <div class="meta">
-            <span class="kicker">Parte II</span>
-            <h4>Prompts para criadores de conteúdo</h4>
-            <a href="#" target="_blank" rel="noopener" class="btn sm">Quero o pack <span class="arrow">→</span></a>
-          </div>
+          <div class="meta"><span class="kicker">Parte II</span><h4>Prompts para criadores de conteúdo</h4><a href="#" target="_blank" rel="noopener" class="btn sm">Quero o pack <span class="arrow">→</span></a></div>
         </article>
         <article class="prompt" data-tilt>
           <div class="prompt-img"><img src="prompt2.jpeg" alt="Pack de prompts para foto de perfil" loading="lazy" decoding="async" /></div>
-          <div class="meta">
-            <span class="kicker">Parte II</span>
-            <h4>Prompts para foto de perfil</h4>
-            <a href="#" target="_blank" rel="noopener" class="btn sm">Quero o pack <span class="arrow">→</span></a>
-          </div>
+          <div class="meta"><span class="kicker">Parte II</span><h4>Prompts para foto de perfil</h4><a href="#" target="_blank" rel="noopener" class="btn sm">Quero o pack <span class="arrow">→</span></a></div>
         </article>
         <article class="prompt" data-tilt>
           <div class="prompt-img"><img src="prompt3.jpeg" alt="Pack de prompts para foto de perfil, volume 2" loading="lazy" decoding="async" /></div>
-          <div class="meta">
-            <span class="kicker">Novo</span>
-            <h4>Foto de perfil · Vol. 2</h4>
-            <a href="#" target="_blank" rel="noopener" class="btn sm">Quero o pack <span class="arrow">→</span></a>
-          </div>
+          <div class="meta"><span class="kicker">Novo</span><h4>Foto de perfil · Vol. 2</h4><a href="#" target="_blank" rel="noopener" class="btn sm">Quero o pack <span class="arrow">→</span></a></div>
         </article>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== FAQ ===================== -->
+<!-- FAQ (Dobra 9) -->
 <section class="section faq" id="faq">
   <div class="wrap">
     <div class="faq-head reveal">
@@ -690,45 +586,22 @@ a{color:inherit;text-decoration:none}
       <h2>Perguntas frequentes</h2>
       <p>Algumas coisas que você provavelmente quer saber.</p>
     </div>
-
     <div class="faq-list reveal">
-      <details class="faq-item">
-        <summary>Vocês atendem quais tipos de empresa? <span class="ico" aria-hidden="true">+</span></summary>
-        <div class="ans">Trabalhamos com empresas de diferentes segmentos. Mais importante do que o nicho é entender se existe um problema de marketing que a gente pode resolver.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Vocês trabalham com empresas pequenas? <span class="ico" aria-hidden="true">+</span></summary>
-        <div class="ans">Sim. O projeto precisa fazer sentido pros dois lados. Nossa recomendação depende do momento, da estrutura e do objetivo da empresa.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Vocês fazem apenas social media? <span class="ico" aria-hidden="true">+</span></summary>
-        <div class="ans">Não. Social media é apenas uma parte do que fazemos. Podemos atuar em estratégia, tráfego, branding, sites, conteúdo e estruturação de marketing.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Preciso contratar todos os serviços? <span class="ico" aria-hidden="true">+</span></summary>
-        <div class="ans">Não — a ideia é justamente o contrário. Primeiro entendemos o que você precisa. Depois montamos a solução.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Quanto custa contratar a TENKS? <span class="ico" aria-hidden="true">+</span></summary>
-        <div class="ans">Depende do projeto, dos objetivos e da estrutura necessária. Em vez de trabalhar com uma tabela engessada, a gente avalia o cenário antes de apresentar uma proposta.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Posso falar com vocês antes de contratar? <span class="ico" aria-hidden="true">+</span></summary>
-        <div class="ans">Claro. O primeiro contato serve justamente pra entender o momento da sua empresa e descobrir se existe fit.</div>
-      </details>
-      <details class="faq-item">
-        <summary>E se eu não souber exatamente o que preciso? <span class="ico" aria-hidden="true">+</span></summary>
-        <div class="ans">Melhor ainda. Você não precisa chegar com a solução. Precisa chegar com o problema.</div>
-      </details>
+      <details class="faq-item"><summary>Vocês atendem quais tipos de empresa? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Trabalhamos com empresas de diferentes segmentos. Mais importante do que o nicho é entender se existe um problema de marketing que a gente pode resolver.</div></details>
+      <details class="faq-item"><summary>Vocês trabalham com empresas pequenas? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Sim. O projeto precisa fazer sentido pros dois lados. Nossa recomendação depende do momento, da estrutura e do objetivo da empresa.</div></details>
+      <details class="faq-item"><summary>Vocês fazem apenas social media? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Não. Social media é apenas uma parte do que fazemos. Podemos atuar em estratégia, tráfego, branding, sites, conteúdo e estruturação de marketing.</div></details>
+      <details class="faq-item"><summary>Preciso contratar todos os serviços? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Não — a ideia é justamente o contrário. Primeiro entendemos o que você precisa. Depois montamos a solução.</div></details>
+      <details class="faq-item"><summary>Quanto custa contratar a TENKS? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Depende do projeto, dos objetivos e da estrutura necessária. Em vez de trabalhar com uma tabela engessada, a gente avalia o cenário antes de apresentar uma proposta.</div></details>
+      <details class="faq-item"><summary>Posso falar com vocês antes de contratar? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Claro. O primeiro contato serve justamente pra entender o momento da sua empresa e descobrir se existe fit.</div></details>
+      <details class="faq-item"><summary>E se eu não souber exatamente o que preciso? <span class="ico" aria-hidden="true">+</span></summary><div class="ans">Melhor ainda. Você não precisa chegar com a solução. Precisa chegar com o problema.</div></details>
     </div>
-
     <div class="faq-cta reveal">
       <a href="https://wa.me/message/P6BFG3Q5HAMEO1" target="_blank" rel="noopener" class="btn glow lg" data-magnetic>Quero conversar sobre meu negócio <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
 
-<!-- ===================== CTA ===================== -->
+<!-- CTA -->
 <section class="section cta" id="contato">
   <div class="wrap reveal">
     <h2 class="display">Pronto pra construir<br>algo que impressiona?</h2>
@@ -740,21 +613,21 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<!-- ===================== FOOTER ===================== -->
+<!-- FOOTER -->
 <footer class="foot">
   <div class="wrap">
     <div class="foot-top">
       <div>
         <a class="brand" href="#topo"><img src="logo.jpg" alt="Logo TENKS" width="38" height="38" loading="lazy" decoding="async" /><span>TENKS</span></a>
-        <div class="tagline">Crie o que conecta.</div>
+        <div class="tagline">Você imagina. A gente faz acontecer.</div>
       </div>
       <div class="foot-col">
         <h5>Navegar</h5>
         <a href="#servicos">Serviços</a>
+        <a href="#processo">Processo</a>
         <a href="#sobre">Sobre</a>
         <a href="#educacao">Cursos &amp; Prompts</a>
         <a href="#faq">FAQ</a>
-        <a href="#contato">Contato</a>
       </div>
       <div class="foot-col">
         <h5>Conectar</h5>
@@ -775,153 +648,69 @@ a{color:inherit;text-decoration:none}
   "use strict";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ============================================================
-     HERO SHADER — WebGL2, versão preto e branco
-     ============================================================ */
+  /* HERO SHADER — WebGL2 preto e branco */
   (function(){
     var heroEl = document.getElementById("topo");
     var canvas = document.getElementById("heroCanvas");
     if(!heroEl || !canvas) return;
     var gl = canvas.getContext("webgl2");
     if(!gl){ heroEl.classList.add("no-webgl"); return; }
-
     var vertexSrc = "#version 300 es\nprecision highp float;\nin vec4 position;\nvoid main(){gl_Position=position;}";
-
     var fragmentSrc = "#version 300 es\n" +
-      "precision highp float;\n" +
-      "out vec4 O;\n" +
-      "uniform vec2 resolution;\n" +
-      "uniform float time;\n" +
-      "#define FC gl_FragCoord.xy\n" +
-      "#define T time\n" +
-      "#define R resolution\n" +
-      "#define MN min(R.x,R.y)\n" +
+      "precision highp float;\nout vec4 O;\nuniform vec2 resolution;\nuniform float time;\n" +
+      "#define FC gl_FragCoord.xy\n#define T time\n#define R resolution\n#define MN min(R.x,R.y)\n" +
       "float rnd(vec2 p){p=fract(p*vec2(12.9898,78.233));p+=dot(p,p+34.56);return fract(p.x*p.y);}\n" +
       "float noise(in vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);float a=rnd(i),b=rnd(i+vec2(1,0)),c=rnd(i+vec2(0,1)),d=rnd(i+1.);return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);}\n" +
       "float fbm(vec2 p){float t=.0,a=1.;mat2 m=mat2(1.,-.5,.2,1.2);for(int i=0;i<5;i++){t+=a*noise(p);p*=2.*m;a*=.5;}return t;}\n" +
       "float clouds(vec2 p){float d=1.,t=.0;for(float i=.0;i<3.;i++){float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);t=mix(t,d,a);d=a;p*=2./(i+1.);}return t;}\n" +
       "void main(void){\n" +
-      "  vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);\n" +
-      "  vec3 col=vec3(0);\n" +
-      "  float bg=clouds(vec2(st.x+T*.5,-st.y));\n" +
-      "  uv*=1.-.3*(sin(T*.2)*.5+.5);\n" +
-      "  for(float i=1.;i<12.;i++){\n" +
-      "    uv+=.1*cos(i*vec2(.1+.01*i,.8)+i*i+T*.5+.1*uv.x);\n" +
-      "    vec2 p=uv;\n" +
-      "    float d=length(p);\n" +
-      "    col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);\n" +
-      "    float b=noise(i+p+bg*1.731);\n" +
-      "    col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));\n" +
-      "    col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);\n" +
-      "  }\n" +
-      "  float g=dot(col, vec3(0.299,0.587,0.114));\n" +
-      "  g=pow(g, 1.32)*0.6;\n" +
-      "  O=vec4(vec3(g),1);\n" +
-      "}";
-
-    var vertices = [-1, 1, -1, -1, 1, 1, 1, -1];
+      "  vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);\n  vec3 col=vec3(0);\n" +
+      "  float bg=clouds(vec2(st.x+T*.5,-st.y));\n  uv*=1.-.3*(sin(T*.2)*.5+.5);\n" +
+      "  for(float i=1.;i<12.;i++){\n    uv+=.1*cos(i*vec2(.1+.01*i,.8)+i*i+T*.5+.1*uv.x);\n    vec2 p=uv;float d=length(p);\n" +
+      "    col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);\n    float b=noise(i+p+bg*1.731);\n" +
+      "    col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));\n    col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);\n  }\n" +
+      "  float g=dot(col, vec3(0.299,0.587,0.114));\n  g=pow(g, 1.32)*0.6;\n  O=vec4(vec3(g),1);\n}";
+    var vertices = [-1,1,-1,-1,1,1,1,-1];
     var dpr = Math.max(1, 0.5 * window.devicePixelRatio);
     var program, vs, fs, buffer, uni = {};
-
-    function compile(shader, source){
-      gl.shaderSource(shader, source); gl.compileShader(shader);
-      if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS)){ console.error("shader:", gl.getShaderInfoLog(shader)); }
-    }
-    function setup(){
-      vs = gl.createShader(gl.VERTEX_SHADER); fs = gl.createShader(gl.FRAGMENT_SHADER);
-      compile(vs, vertexSrc); compile(fs, fragmentSrc);
-      program = gl.createProgram(); gl.attachShader(program, vs); gl.attachShader(program, fs); gl.linkProgram(program);
-      if(!gl.getProgramParameter(program, gl.LINK_STATUS)){ console.error(gl.getProgramInfoLog(program)); heroEl.classList.add("no-webgl"); return false; }
-      return true;
-    }
-    function init(){
-      buffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-      var position = gl.getAttribLocation(program, "position");
-      gl.enableVertexAttribArray(position); gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-      uni.resolution = gl.getUniformLocation(program, "resolution");
-      uni.time = gl.getUniformLocation(program, "time");
-    }
-    function resize(){
-      var r = heroEl.getBoundingClientRect();
-      canvas.width = Math.max(1, Math.round(r.width * dpr));
-      canvas.height = Math.max(1, Math.round(r.height * dpr));
-      gl.viewport(0, 0, canvas.width, canvas.height);
-    }
-    function render(now){
-      if(!program) return;
-      gl.clearColor(0,0,0,1); gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.useProgram(program); gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-      gl.uniform2f(uni.resolution, canvas.width, canvas.height);
-      gl.uniform1f(uni.time, now * 1e-3);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    }
+    function compile(s, src){ gl.shaderSource(s, src); gl.compileShader(s); if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){ console.error(gl.getShaderInfoLog(s)); } }
+    function setup(){ vs=gl.createShader(gl.VERTEX_SHADER); fs=gl.createShader(gl.FRAGMENT_SHADER); compile(vs,vertexSrc); compile(fs,fragmentSrc); program=gl.createProgram(); gl.attachShader(program,vs); gl.attachShader(program,fs); gl.linkProgram(program); if(!gl.getProgramParameter(program,gl.LINK_STATUS)){ console.error(gl.getProgramInfoLog(program)); heroEl.classList.add("no-webgl"); return false; } return true; }
+    function init(){ buffer=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buffer); gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(vertices),gl.STATIC_DRAW); var pos=gl.getAttribLocation(program,"position"); gl.enableVertexAttribArray(pos); gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0); uni.resolution=gl.getUniformLocation(program,"resolution"); uni.time=gl.getUniformLocation(program,"time"); }
+    function resize(){ var r=heroEl.getBoundingClientRect(); canvas.width=Math.max(1,Math.round(r.width*dpr)); canvas.height=Math.max(1,Math.round(r.height*dpr)); gl.viewport(0,0,canvas.width,canvas.height); }
+    function render(now){ if(!program) return; gl.clearColor(0,0,0,1); gl.clear(gl.COLOR_BUFFER_BIT); gl.useProgram(program); gl.bindBuffer(gl.ARRAY_BUFFER,buffer); gl.uniform2f(uni.resolution,canvas.width,canvas.height); gl.uniform1f(uni.time,now*1e-3); gl.drawArrays(gl.TRIANGLE_STRIP,0,4); }
     if(!setup()) return;
     init(); resize();
-
     var raf, running = true;
-    function loop(now){ if(!running) return; render(now); raf = requestAnimationFrame(loop); }
-    if(reduce){ render(0); } else { raf = requestAnimationFrame(loop); }
-
+    function loop(now){ if(!running) return; render(now); raf=requestAnimationFrame(loop); }
+    if(reduce){ render(0); } else { raf=requestAnimationFrame(loop); }
     if("IntersectionObserver" in window && !reduce){
-      new IntersectionObserver(function(en){
-        en.forEach(function(e){
-          if(e.isIntersecting && !running){ running = true; raf = requestAnimationFrame(loop); }
-          else if(!e.isIntersecting && running){ running = false; cancelAnimationFrame(raf); }
-        });
-      }, {threshold:0}).observe(heroEl);
+      new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting && !running){ running=true; raf=requestAnimationFrame(loop); } else if(!e.isIntersecting && running){ running=false; cancelAnimationFrame(raf); } }); }, {threshold:0}).observe(heroEl);
     }
-    var rt2;
-    window.addEventListener("resize", function(){ clearTimeout(rt2); rt2 = setTimeout(function(){ dpr = Math.max(1, 0.5 * window.devicePixelRatio); resize(); }, 150); });
+    var rt2; window.addEventListener("resize", function(){ clearTimeout(rt2); rt2=setTimeout(function(){ dpr=Math.max(1,0.5*window.devicePixelRatio); resize(); },150); });
   })();
 
-  /* ============================================================
-     Contagem crescente dos números
-     ============================================================ */
+  /* Contagem crescente */
   (function(){
     var nums = Array.prototype.slice.call(document.querySelectorAll(".stat .num[data-to]"));
     if(!nums.length) return;
     function run(el){
-      var to = parseFloat(el.getAttribute("data-to")) || 0;
-      var pre = el.getAttribute("data-prefix") || "";
-      var suf = el.getAttribute("data-suffix") || "";
-      if(reduce){ el.textContent = pre + to + suf; return; }
-      var dur = 1600, t0 = performance.now();
-      function tick(now){
-        var p = Math.min(1, (now - t0) / dur);
-        var eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = pre + Math.round(to * eased) + suf;
-        if(p < 1) requestAnimationFrame(tick);
-      }
+      var to=parseFloat(el.getAttribute("data-to"))||0, pre=el.getAttribute("data-prefix")||"", suf=el.getAttribute("data-suffix")||"";
+      if(reduce){ el.textContent=pre+to+suf; return; }
+      var dur=1600, t0=performance.now();
+      function tick(now){ var p=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-p,3); el.textContent=pre+Math.round(to*e)+suf; if(p<1) requestAnimationFrame(tick); }
       requestAnimationFrame(tick);
     }
-    if("IntersectionObserver" in window){
-      var io = new IntersectionObserver(function(en){
-        en.forEach(function(e){ if(e.isIntersecting){ run(e.target); io.unobserve(e.target); } });
-      }, {threshold:.5});
-      nums.forEach(function(n){ io.observe(n); });
-    } else { nums.forEach(run); }
+    if("IntersectionObserver" in window){ var io=new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ run(e.target); io.unobserve(e.target); } }); }, {threshold:.5}); nums.forEach(function(n){ io.observe(n); }); }
+    else { nums.forEach(run); }
   })();
 
-  /* ============================================================
-     Carrossel de logos dos clientes
-     ============================================================ */
+  /* Carrossel de logos */
   (function(){
-    var marquee = document.getElementById("logoMarquee");
-    var track = document.getElementById("logoTrack");
-    if(!marquee || !track || typeof track.animate !== "function") return;
-    Array.prototype.slice.call(track.children).forEach(function(node){
-      var c = node.cloneNode(true); c.setAttribute("aria-hidden","true"); track.appendChild(c);
-    });
-    var count = track.children.length / 2, anim = null, target = 1, raf, tries = 0;
-    function build(){
-      var w = track.children[count].getBoundingClientRect().left - track.children[0].getBoundingClientRect().left;
-      if((!w || w < 10) && tries++ < 60){ requestAnimationFrame(build); return; }
-      var rate = anim ? anim.playbackRate : 1;
-      if(anim) anim.cancel();
-      anim = track.animate([{transform:"translateX(0)"},{transform:"translateX(-"+w+"px)"}], {duration:(w/45)*1000, iterations:Infinity, easing:"linear"});
-      anim.playbackRate = rate;
-    }
+    var marquee=document.getElementById("logoMarquee"), track=document.getElementById("logoTrack");
+    if(!marquee || !track || typeof track.animate!=="function") return;
+    Array.prototype.slice.call(track.children).forEach(function(n){ var c=n.cloneNode(true); c.setAttribute("aria-hidden","true"); track.appendChild(c); });
+    var count=track.children.length/2, anim=null, target=1, raf, tries=0;
+    function build(){ var w=track.children[count].getBoundingClientRect().left-track.children[0].getBoundingClientRect().left; if((!w||w<10)&&tries++<60){ requestAnimationFrame(build); return; } var rate=anim?anim.playbackRate:1; if(anim) anim.cancel(); anim=track.animate([{transform:"translateX(0)"},{transform:"translateX(-"+w+"px)"}],{duration:(w/45)*1000,iterations:Infinity,easing:"linear"}); anim.playbackRate=rate; }
     build();
     function ramp(){ if(!anim) return; var c=anim.playbackRate,n=c+(target-c)*.12; if(Math.abs(n-target)<.01)n=target; anim.playbackRate=n; if(n!==target) raf=requestAnimationFrame(ramp); }
     function setT(v){ target=v; cancelAnimationFrame(raf); ramp(); }
@@ -930,75 +719,46 @@ a{color:inherit;text-decoration:none}
     var rt; window.addEventListener("resize", function(){ clearTimeout(rt); tries=0; rt=setTimeout(build,200); });
   })();
 
-  /* ---- nav condensa no scroll ---- */
-  var nav = document.getElementById("nav");
-  var onScroll = function(){ nav.classList.toggle("scrolled", window.scrollY > 24); };
+  /* nav */
+  var nav=document.getElementById("nav");
+  var onScroll=function(){ nav.classList.toggle("scrolled", window.scrollY>24); };
   onScroll(); window.addEventListener("scroll", onScroll, {passive:true});
+  var mBtn=document.getElementById("menuBtn");
+  mBtn.addEventListener("click", function(){ var open=nav.classList.toggle("open"); mBtn.setAttribute("aria-expanded", open?"true":"false"); mBtn.setAttribute("aria-label", open?"Fechar menu":"Abrir menu"); });
+  document.querySelectorAll("#navLinks a").forEach(function(a){ a.addEventListener("click", function(){ nav.classList.remove("open"); mBtn.setAttribute("aria-expanded","false"); }); });
 
-  /* ---- menu mobile ---- */
-  var mBtn = document.getElementById("menuBtn");
-  mBtn.addEventListener("click", function(){
-    var open = nav.classList.toggle("open");
-    mBtn.setAttribute("aria-expanded", open ? "true" : "false");
-    mBtn.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
-  });
-  document.querySelectorAll("#navLinks a").forEach(function(a){
-    a.addEventListener("click", function(){ nav.classList.remove("open"); mBtn.setAttribute("aria-expanded","false"); });
-  });
-
-  /* ---- reveal on scroll ---- */
+  /* reveal */
   if("IntersectionObserver" in window && !reduce){
-    var io2 = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io2.unobserve(e.target); } });
-    }, {threshold:.14, rootMargin:"0px 0px -8% 0px"});
+    var io2=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io2.unobserve(e.target); } }); }, {threshold:.14, rootMargin:"0px 0px -8% 0px"});
     document.querySelectorAll(".reveal").forEach(function(el){ io2.observe(el); });
-  } else {
-    document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("in"); });
-  }
+  } else { document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("in"); }); }
 
-  var finePointer = window.matchMedia("(pointer:fine)").matches;
-
-  /* ---- botões magnéticos + tilt ---- */
+  var finePointer=window.matchMedia("(pointer:fine)").matches;
   if(finePointer && !reduce){
     document.querySelectorAll("[data-magnetic]").forEach(function(btn){
-      var str = 0.28;
-      btn.addEventListener("mousemove", function(e){
-        var r = btn.getBoundingClientRect();
-        btn.style.transform = "translate("+((e.clientX-r.left-r.width/2)*str)+"px,"+((e.clientY-r.top-r.height/2)*str)+"px)";
-      });
-      btn.addEventListener("mouseleave", function(){ btn.style.transform = "translate(0,0)"; });
+      var str=0.28;
+      btn.addEventListener("mousemove", function(e){ var r=btn.getBoundingClientRect(); btn.style.transform="translate("+((e.clientX-r.left-r.width/2)*str)+"px,"+((e.clientY-r.top-r.height/2)*str)+"px)"; });
+      btn.addEventListener("mouseleave", function(){ btn.style.transform="translate(0,0)"; });
     });
     document.querySelectorAll("[data-tilt]").forEach(function(card){
-      var max = 6;
-      card.addEventListener("mousemove", function(e){
-        var r = card.getBoundingClientRect();
-        var px = (e.clientX-r.left)/r.width - .5, py = (e.clientY-r.top)/r.height - .5;
-        card.style.transform = "perspective(900px) rotateX("+(-py*max)+"deg) rotateY("+(px*max)+"deg)";
-      });
-      card.addEventListener("mouseleave", function(){ card.style.transform = "perspective(900px) rotateX(0) rotateY(0)"; });
+      var max=6;
+      card.addEventListener("mousemove", function(e){ var r=card.getBoundingClientRect(); var px=(e.clientX-r.left)/r.width-.5, py=(e.clientY-r.top)/r.height-.5; card.style.transform="perspective(900px) rotateX("+(-py*max)+"deg) rotateY("+(px*max)+"deg)"; });
+      card.addEventListener("mouseleave", function(){ card.style.transform="perspective(900px) rotateX(0) rotateY(0)"; });
     });
   }
 
-  /* ---- esteira de serviços: loop + câmera lenta no hover ---- */
+  /* esteira de serviços */
   (function(){
-    var marquee = document.getElementById("svcMarquee");
-    var track = document.getElementById("svcTrack");
+    var marquee=document.getElementById("svcMarquee"), track=document.getElementById("svcTrack");
     if(!marquee || !track) return;
-    var originals = Array.prototype.slice.call(track.children);
-    originals.forEach(function(node){ var clone = node.cloneNode(true); clone.setAttribute("aria-hidden","true"); track.appendChild(clone); });
-    if(typeof track.animate !== "function") return;
-    var count = originals.length, anim = null, target = 1, raf, tries = 0;
-    function measure(){ return track.children[count].getBoundingClientRect().left - track.children[0].getBoundingClientRect().left; }
-    function build(){
-      var setWidth = measure();
-      if((!setWidth || setWidth < 10) && tries++ < 60){ requestAnimationFrame(build); return; }
-      var rate = anim ? anim.playbackRate : 1;
-      if(anim) anim.cancel();
-      anim = track.animate([{transform:"translateX(0)"},{transform:"translateX(-"+setWidth+"px)"}], {duration:(setWidth/60)*1000, iterations:Infinity, easing:"linear"});
-      anim.playbackRate = rate;
-    }
+    var originals=Array.prototype.slice.call(track.children);
+    originals.forEach(function(n){ var c=n.cloneNode(true); c.setAttribute("aria-hidden","true"); track.appendChild(c); });
+    if(typeof track.animate!=="function") return;
+    var count=originals.length, anim=null, target=1, raf, tries=0;
+    function measure(){ return track.children[count].getBoundingClientRect().left-track.children[0].getBoundingClientRect().left; }
+    function build(){ var w=measure(); if((!w||w<10)&&tries++<60){ requestAnimationFrame(build); return; } var rate=anim?anim.playbackRate:1; if(anim) anim.cancel(); anim=track.animate([{transform:"translateX(0)"},{transform:"translateX(-"+w+"px)"}],{duration:(w/60)*1000,iterations:Infinity,easing:"linear"}); anim.playbackRate=rate; }
     build();
-    function ramp(){ if(!anim) return; var cur=anim.playbackRate,next=cur+(target-cur)*.12; if(Math.abs(next-target)<.01)next=target; anim.playbackRate=next; if(next!==target) raf=requestAnimationFrame(ramp); }
+    function ramp(){ if(!anim) return; var c=anim.playbackRate,n=c+(target-c)*.12; if(Math.abs(n-target)<.01)n=target; anim.playbackRate=n; if(n!==target) raf=requestAnimationFrame(ramp); }
     function setTarget(v){ target=v; cancelAnimationFrame(raf); ramp(); }
     marquee.addEventListener("mouseenter", function(){ setTarget(0.15); });
     marquee.addEventListener("mouseleave", function(){ setTarget(1); });
