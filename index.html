@@ -809,8 +809,8 @@ a.textlink:hover .arrow{transform:translateX(4px)}
     init(); resize();
     var raf, running = true;
     function loop(now){ if(!running) return; render(now); raf=requestAnimationFrame(loop); }
-    if(reduce){ render(0); } else { raf=requestAnimationFrame(loop); }
-    if("IntersectionObserver" in window && !reduce){
+     raf=requestAnimationFrame(loop);
+    if("IntersectionObserver" in window ){
       new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting && !running){ running=true; raf=requestAnimationFrame(loop); } else if(!e.isIntersecting && running){ running=false; cancelAnimationFrame(raf); } }); }, {threshold:0}).observe(heroEl);
     }
     var rt2; window.addEventListener("resize", function(){ clearTimeout(rt2); rt2=setTimeout(function(){ dpr=Math.max(1,0.5*window.devicePixelRatio); resize(); },150); });
